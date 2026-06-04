@@ -1,0 +1,83 @@
+### Starting TaskPrologue of job 3687857 on a0122 at Mon Jun  1 09:40:07 AM CEST 2026
+Running on cores 112-127 with governor performance
+Mon Jun  1 09:40:07 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     On  |   00000000:E1:00.0 Off |                  Off |
+|  0%   34C    P8             23W /  300W |       0MiB /  49140MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+### Finished TaskPrologue
+
+Running in: /home/hpc/v123be/v123be54/P5_histobias
+Mon Jun  1 09:40:07 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     On  |   00000000:E1:00.0 Off |                  Off |
+|  0%   35C    P0             64W /  300W |       0MiB /  49140MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+CUDA available: True NVIDIA A40
+=== run_eval (real Qwen2.5-VL) ===
+Wrote 450 predictions -> /home/hpc/v123be/v123be54/P5_histobias/results/predictions.jsonl
+=== analyze ===
+Loaded 450 valid predictions.
+saved fig1
+saved fig2
+saved results/summary.csv
+
+=== error rate by language ===
+  English  0.573  (n=150, 95% CI [0.493, 0.650])
+  Chinese  0.533  (n=150, 95% CI [0.454, 0.611])
+  Arabic   0.520  (n=150, 95% CI [0.441, 0.598])
+Done. Results in /home/hpc/v123be/v123be54/P5_histobias/results/ and figures in /home/hpc/v123be/v123be54/P5_histobias/figures/
+=== JOB_STATISTICS ===
+=== current date     : Mon Jun  1 09:43:32 CEST 2026
+= Job-ID             : 3687857 on alex
+= Job-Name           : protobias
+= Job-Command        : /home/hpc/v123be/v123be54/P5_histobias/submit_eval.sh
+= Initial workdir    : /home/hpc/v123be/v123be54/P5_histobias
+= Queue/Partition    : a40
+= Slurm account      : v123be with QOS=normal
+= Features           : el9
+= Requested resources:  for 01:00:00
+= Elapsed runtime    : 00:03:49
+= Total RAM usage    : 18.0 GiB of assigned  GiB (%)
+= Node list          : a0122
+= Subm/Elig/Start/End: 2026-06-01T09:39:32 / 2026-06-01T09:39:32 / 2026-06-01T09:39:43 / 2026-06-01T09:43:32
+======================
+=== Quota infos ======
+    Path                 Used     SoftQ    HardQ    Gracetime  Filec    FileQ    FiHaQ    FileGrace    
+    /home/hpc              77.3G   104.9G   209.7G        N/A      82K     500K   1,000K        N/A    
+    /home/vault             0.0K  1048.6G  2097.2G        N/A       1      200K     400K        N/A    
+    /home/atuin            20.6G     0.0K     0.0K        N/A  30,211                           N/A    
+======================
+=== GPU utilization ==
+gpu_name, gpu_bus_id, pid, gpu_utilization [%], mem_utilization [%], max_memory_usage [MiB], time [ms]
+NVIDIA A40, 00000000:E1:00.0, 2402154, 60 %, 39 %, 16556 MiB, 173718 ms

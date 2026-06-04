@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Claude Code local settings (machine-specific paths)
+.claude/settings.local.json
+
+# Excluded from this public repo:
+#   copyrighted reference papers, and a saved-webpage dump of the HF dataset page
+papers/
+subha-roy_dl4dh_data*
+
+# SLURM stderr is just progress-bar noise; the .out file is kept as the run record
+*.err

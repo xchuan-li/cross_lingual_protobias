@@ -1,0 +1,12 @@
+# Core
+datasets>=4.0
+pillow
+tqdm
+matplotlib
+
+# Translation (pilot)
+deep-translator
+
+# Real model inference (GPU machine only) -- install separately there:
+#   pip install torch --index-url https://download.pytorch.org/whl/cu121
+#   pip install "transformers>=4.49" accelerate qwen-vl-utils

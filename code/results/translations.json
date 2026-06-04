@@ -1,0 +1,740 @@
+{
+  "ani00298": {
+    "source": "A bird sits on the ground with a small stone in the background near a large log.",
+    "en": "A bird sits on the ground with a small stone in the background near a large log.",
+    "zh": "一只鸟坐在地上，背景中靠近一根大圆木的地方有一块小石头。",
+    "ar": "طائر يجلس على الأرض مع حجر صغير في الخلفية بالقرب من جذع شجرة كبير."
+  },
+  "ani00221": {
+    "source": "A bird stands on a rock near a small bush with a blue water puddle in the background.",
+    "en": "A bird stands on a rock near a small bush with a blue water puddle in the background.",
+    "zh": "一只鸟站在小灌木丛附近的岩石上，背景是蓝色的水坑。",
+    "ar": "طائر يقف على صخرة بالقرب من شجيرة صغيرة مع بركة مياه زرقاء في الخلفية."
+  },
+  "ani01509": {
+    "source": "An animal rests near a tree with one pebble beside it in a grassy field.",
+    "en": "An animal rests near a tree with one pebble beside it in a grassy field.",
+    "zh": "草地上，一只动物在一棵树旁休息，树旁有一颗鹅卵石。",
+    "ar": "حيوان يستريح بالقرب من شجرة وبجانبه حصاة واحدة في حقل عشبي."
+  },
+  "ani00348": {
+    "source": "A bird stands on a rock beside a pile of twigs in the background near a pond.",
+    "en": "A bird stands on a rock beside a pile of twigs in the background near a pond.",
+    "zh": "一只鸟站在池塘附近的一块岩石上，旁边有一堆树枝。",
+    "ar": "طائر يقف على صخرة بجانب كومة من الأغصان في الخلفية بالقرب من بركة."
+  },
+  "ani01130": {
+    "source": "A mammal stands on the ground beside a small pond with a green reed in the background.",
+    "en": "A mammal stands on the ground beside a small pond with a green reed in the background.",
+    "zh": "一只哺乳动物站在一个小池塘旁边的地上，背景是绿色的芦苇。",
+    "ar": "حيوان ثديي يقف على الأرض بجانب بركة صغيرة مع قصبة خضراء في الخلفية."
+  },
+  "ani01017": {
+    "source": "A mammal rests by a pond with one pebble nearby.",
+    "en": "A mammal rests by a pond with one pebble nearby.",
+    "zh": "一只哺乳动物在池塘边休息，附近有一块鹅卵石。",
+    "ar": "حيوان ثديي يستريح بالقرب من بركة مع وجود حصاة واحدة قريبة."
+  },
+  "ani01983": {
+    "source": "An animal walks near a pond with a small fallen log behind it in the background.",
+    "en": "An animal walks near a pond with a small fallen log behind it in the background.",
+    "zh": "一只动物在池塘附近行走，背景中有一根倒下的小圆木。",
+    "ar": "حيوان يمشي بالقرب من بركة وخلفه جذع شجرة صغير متساقط في الخلفية."
+  },
+  "ani00357": {
+    "source": "A bird perches on a branch with a pile of twigs behind it in a grassy field.",
+    "en": "A bird perches on a branch with a pile of twigs behind it in a grassy field.",
+    "zh": "草地上，一只鸟栖息在一根树枝上，后面有一堆树枝。",
+    "ar": "طائر يجلس على فرع وخلفه كومة من الأغصان في حقل عشبي."
+  },
+  "ani00837": {
+    "source": "A mammal lounges on a rock near a blue water puddle in a forest clearing.",
+    "en": "A mammal lounges on a rock near a blue water puddle in a forest clearing.",
+    "zh": "森林空地里，一只哺乳动物躺在蓝色水坑附近的岩石上。",
+    "ar": "حيوان ثديي يجلس على صخرة بالقرب من بركة مياه زرقاء في غابة."
+  },
+  "ani00252": {
+    "source": "A bird stands on a rock near a tree stump to its left in a forest clearing.",
+    "en": "A bird stands on a rock near a tree stump to its left in a forest clearing.",
+    "zh": "森林空地上，一只鸟站在左侧树桩附近的一块岩石上。",
+    "ar": "طائر يقف على صخرة بالقرب من جذع شجرة على يساره في غابة خالية."
+  },
+  "ani01108": {
+    "source": "A mammal lies on the grass with exactly two piles of twigs in the background.",
+    "en": "A mammal lies on the grass with exactly two piles of twigs in the background.",
+    "zh": "一只哺乳动物躺在草地上，背景中有两堆树枝。",
+    "ar": "حيوان ثديي يرقد على العشب مع كومتين من الأغصان في الخلفية."
+  },
+  "ani00084": {
+    "source": "A bird perches on a small tree stump near green grass.",
+    "en": "A bird perches on a small tree stump near green grass.",
+    "zh": "一只鸟栖息在绿草附近的一个小树桩上。",
+    "ar": "طائر يجلس على جذع شجرة صغيرة بالقرب من العشب الأخضر."
+  },
+  "ani00370": {
+    "source": "A bird stands on the ground with a driftwood piece in the background near a small pond.",
+    "en": "A bird stands on the ground with a driftwood piece in the background near a small pond.",
+    "zh": "一只鸟站在地上，背景是一个小池塘附近的一块浮木。",
+    "ar": "طائر يقف على الأرض مع قطعة خشب طافية في الخلفية بالقرب من بركة صغيرة."
+  },
+  "ani00409": {
+    "source": "A bird perches on a branch with one pebble in the background.",
+    "en": "A bird perches on a branch with one pebble in the background.",
+    "zh": "一只鸟栖息在树枝上，背景是一颗鹅卵石。",
+    "ar": "طائر يجلس على فرع مع حصاة واحدة في الخلفية."
+  },
+  "ani01229": {
+    "source": "A mammal lies on the grass near a blue water puddle in the background.",
+    "en": "A mammal lies on the grass near a blue water puddle in the background.",
+    "zh": "一只哺乳动物躺在背景中蓝色水坑附近的草地上。",
+    "ar": "حيوان ثديي يرقد على العشب بالقرب من بركة ماء زرقاء في الخلفية."
+  },
+  "ani01901": {
+    "source": "An animal rests near a tree with one pebble beside it in a grassy meadow.",
+    "en": "An animal rests near a tree with one pebble beside it in a grassy meadow.",
+    "zh": "草地上，一只动物在一棵树旁休息，树旁有一颗鹅卵石。",
+    "ar": "حيوان يستريح بالقرب من شجرة وبجانبه حصاة واحدة في مرج عشبي."
+  },
+  "ani00008": {
+    "source": "A bird perches on a branch with one pile of twigs in the background of a grassy field.",
+    "en": "A bird perches on a branch with one pile of twigs in the background of a grassy field.",
+    "zh": "草地背景中，一只鸟栖息在树枝上，树枝上有一堆树枝。",
+    "ar": "طائر يجلس على فرع مع كومة واحدة من الأغصان في خلفية حقل عشبي."
+  },
+  "ani00392": {
+    "source": "A bird perches on a small tree stump near a pond.",
+    "en": "A bird perches on a small tree stump near a pond.",
+    "zh": "一只鸟栖息在池塘附近的一个小树桩上。",
+    "ar": "طائر يجلس على جذع شجرة صغيرة بالقرب من البركة."
+  },
+  "ani00339": {
+    "source": "A bird perches on a branch with a brown sand mound in the background.",
+    "en": "A bird perches on a branch with a brown sand mound in the background.",
+    "zh": "一只鸟栖息在树枝上，背景是棕色的沙丘。",
+    "ar": "طائر يجلس على فرع مع تلة رملية بنية في الخلفية."
+  },
+  "ani01194": {
+    "source": "A mammal stands on grass with a small sand mound in the background.",
+    "en": "A mammal stands on grass with a small sand mound in the background.",
+    "zh": "一只哺乳动物站在草地上，背景是一个小沙丘。",
+    "ar": "حيوان ثديي يقف على العشب مع وجود كومة رملية صغيرة في الخلفية."
+  },
+  "ani01111": {
+    "source": "A mammal rests on a rock near a pond with exactly one stone in the background.",
+    "en": "A mammal rests on a rock near a pond with exactly one stone in the background.",
+    "zh": "一只哺乳动物躺在池塘附近的一块岩石上，背景中正好有一块石头。",
+    "ar": "حيوان ثديي يستريح على صخرة بالقرب من بركة مع وجود حجر واحد بالضبط في الخلفية."
+  },
+  "ani01917": {
+    "source": "An animal walks near a pond with exactly two pebbles in the foreground.",
+    "en": "An animal walks near a pond with exactly two pebbles in the foreground.",
+    "zh": "一只动物在池塘附近行走，前景中恰好有两块鹅卵石。",
+    "ar": "حيوان يمشي بالقرب من بركة بها حصاتتان بالضبط في المقدمة."
+  },
+  "ani00226": {
+    "source": "A bird stands on a rock near a pond with a green reed plant in the background.",
+    "en": "A bird stands on a rock near a pond with a green reed plant in the background.",
+    "zh": "一只鸟站在池塘附近的岩石上，背景是绿色的芦苇植物。",
+    "ar": "طائر يقف على صخرة بالقرب من بركة وفي الخلفية نبات قصب أخضر."
+  },
+  "ani00251": {
+    "source": "A bird sits on the ground with a stone in front of it in a grassy area.",
+    "en": "A bird sits on the ground with a stone in front of it in a grassy area.",
+    "zh": "草地上，一只鸟坐在地上，前面有一块石头。",
+    "ar": "طائر يجلس على الأرض وأمامه حجر في منطقة عشبية."
+  },
+  "ani01608": {
+    "source": "A walking stick insect sits on a rock surrounded by exactly two piles of twigs near a pond.",
+    "en": "A walking stick insect sits on a rock surrounded by exactly two piles of twigs near a pond.",
+    "zh": "一只手杖昆虫坐在池塘附近的一块岩石上，周围正好有两堆树枝。",
+    "ar": "تجلس حشرة عصا المشي على صخرة محاطة بأكوامتين من الأغصان بالقرب من البركة."
+  },
+  "ani00850": {
+    "source": "A mammal swims near the water surface with a small rock behind it.",
+    "en": "A mammal swims near the water surface with a small rock behind it.",
+    "zh": "一只哺乳动物在水面附近游泳，后面有一块小石头。",
+    "ar": "حيوان ثديي يسبح بالقرب من سطح الماء وخلفه صخرة صغيرة."
+  },
+  "ani00746": {
+    "source": "A bird perches on a branch with a small bush behind it near a pond.",
+    "en": "A bird perches on a branch with a small bush behind it near a pond.",
+    "zh": "一只鸟栖息在树枝上，树枝后面有一个池塘附近的小灌木丛。",
+    "ar": "طائر يجلس على فرع وخلفه شجيرة صغيرة بالقرب من البركة."
+  },
+  "ani01399": {
+    "source": "A mammal relaxes on the grass with a small fallen log behind it near a pond.",
+    "en": "A mammal relaxes on the grass with a small fallen log behind it near a pond.",
+    "zh": "一只哺乳动物在草地上放松，后面靠近池塘的地方有一根倒下的小圆木。",
+    "ar": "حيوان ثديي يسترخي على العشب مع سقوط جذع شجرة صغير خلفه بالقرب من البركة."
+  },
+  "ani01032": {
+    "source": "A mammal sits near a leaf pile with a blue color tone in a grassy field.",
+    "en": "A mammal sits near a leaf pile with a blue color tone in a grassy field.",
+    "zh": "草地上，一只哺乳动物坐在蓝色色调的树叶堆附近。",
+    "ar": "حيوان ثديي يجلس بالقرب من كومة أوراق ذات لون أزرق في حقل عشبي."
+  },
+  "ani01632": {
+    "source": "An animal perches on a branch with a leaf pile in the background of a grassy field.",
+    "en": "An animal perches on a branch with a leaf pile in the background of a grassy field.",
+    "zh": "草地背景中，一只动物栖息在树枝上，树枝上有一堆树叶。",
+    "ar": "حيوان يجلس على فرع مع كومة من الأوراق في خلفية حقل عشبي."
+  },
+  "ani00282": {
+    "source": "A bird sits on the ground with a small stone in the background near a large log.",
+    "en": "A bird sits on the ground with a small stone in the background near a large log.",
+    "zh": "一只鸟坐在地上，背景中靠近一根大圆木的地方有一块小石头。",
+    "ar": "طائر يجلس على الأرض مع حجر صغير في الخلفية بالقرب من جذع شجرة كبير."
+  },
+  "ani00562": {
+    "source": "A bird stands on a rock near a pond with a driftwood piece in the background.",
+    "en": "A bird stands on a rock near a pond with a driftwood piece in the background.",
+    "zh": "一只鸟站在池塘附近的岩石上，背景是一块浮木。",
+    "ar": "طائر يقف على صخرة بالقرب من بركة مع قطعة خشب طافية في الخلفية."
+  },
+  "ani00233": {
+    "source": "A bird perches on a branch with a green fallen leaf in the background of a grassy field.",
+    "en": "A bird perches on a branch with a green fallen leaf in the background of a grassy field.",
+    "zh": "草地背景中，一只鸟栖息在树枝上，树枝上有一片绿色的落叶。",
+    "ar": "طائر يجلس على فرع مع ورقة خضراء متساقطة في خلفية حقل عشبي."
+  },
+  "ani00279": {
+    "source": "A bird stands on a rock near a pond with a reed plant in the background.",
+    "en": "A bird stands on a rock near a pond with a reed plant in the background.",
+    "zh": "一只鸟站在池塘附近的岩石上，背景是芦苇植物。",
+    "ar": "طائر يقف على صخرة بالقرب من بركة وفي الخلفية نبات قصب."
+  },
+  "ani01435": {
+    "source": "An animal perches on a branch with a green flower patch in the background of a grassy field.",
+    "en": "An animal perches on a branch with a green flower patch in the background of a grassy field.",
+    "zh": "草地背景中，一只动物栖息在树枝上，树枝上有一片绿色的花丛。",
+    "ar": "حيوان يجلس على فرع به رقعة زهرة خضراء في خلفية حقل عشبي."
+  },
+  "ani00231": {
+    "source": "A bird sits on the ground with a brown sand mound in the background.",
+    "en": "A bird sits on the ground with a brown sand mound in the background.",
+    "zh": "一只鸟坐在地上，背景是一个棕色的沙丘。",
+    "ar": "طائر يجلس على الأرض وفي الخلفية كومة رملية بنية اللون."
+  },
+  "ani00847": {
+    "source": "A mammal swims near the water surface with a small branch behind it.",
+    "en": "A mammal swims near the water surface with a small branch behind it.",
+    "zh": "一只哺乳动物在水面附近游泳，背后有一根小树枝。",
+    "ar": "حيوان ثديي يسبح بالقرب من سطح الماء وخلفه فرع صغير."
+  },
+  "ani00306": {
+    "source": "A bird perches on a branch with one mushroom patch in the background.",
+    "en": "A bird perches on a branch with one mushroom patch in the background.",
+    "zh": "一只鸟栖息在树枝上，背景是一片蘑菇地。",
+    "ar": "طائر يجلس على فرع مع رقعة فطر واحدة في الخلفية."
+  },
+  "obj01816": {
+    "source": "A tableware item rests on a plain tabletop with a trivet to the left of it under soft lighting.",
+    "en": "A tableware item rests on a plain tabletop with a trivet to the left of it under soft lighting.",
+    "zh": "餐具放在朴素的桌面上，在柔和的灯光下，左边有一个三脚架。",
+    "ar": "يتم وضع أحد أدوات المائدة على سطح طاولة عادي مع حامل على يساره تحت إضاءة ناعمة."
+  },
+  "obj01179": {
+    "source": "A vehicle is parked on a quiet street with a puddle to the left of it and a signpost nearby.",
+    "en": "A vehicle is parked on a quiet street with a puddle to the left of it and a signpost nearby.",
+    "zh": "一辆车停在一条安静的街道上，左边有一个水坑，附近有一个路标。",
+    "ar": "سيارة متوقفة في شارع هادئ مع وجود بركة مياه على يسارها وعلامة بالقرب منها."
+  },
+  "obj00754": {
+    "source": "A vehicle is centered on a flat paved area with two sidewalk tiles near it and a distant fence.",
+    "en": "A vehicle is centered on a flat paved area with two sidewalk tiles near it and a distant fence.",
+    "zh": "一辆车辆位于平坦的铺装区域的中心，附近有两块人行道瓷砖，远处有栅栏。",
+    "ar": "تتمركز مركبة في منطقة مرصوفة مسطحة وبجانبها بلاطتي رصيف وسياج بعيد."
+  },
+  "obj01126": {
+    "source": "A vehicle is parked on a quiet street with exactly one cone near a manhole cover.",
+    "en": "A vehicle is parked on a quiet street with exactly one cone near a manhole cover.",
+    "zh": "一辆车停在一条安静的街道上，井盖附近正好有一个锥体。",
+    "ar": "مركبة متوقفة في شارع هادئ مع وجود مخروط واحد بالضبط بالقرب من غطاء فتحة التفتيش."
+  },
+  "obj01245": {
+    "source": "A vehicle is parked on a quiet street with exactly four zebra crossing markings next to it and a small traffic cone nearby.",
+    "en": "A vehicle is parked on a quiet street with exactly four zebra crossing markings next to it and a small traffic cone nearby.",
+    "zh": "一辆车停在一条安静的街道上，旁边正好有四个斑马线标记，附近还有一个小型交通锥。",
+    "ar": "سيارة متوقفة في شارع هادئ وبجوارها أربع علامات عبور حمار وحشي ومخروط مرور صغير بالقرب منها."
+  },
+  "obj00145": {
+    "source": "A piece of furniture rests on a clean floor with one stool near it and a plain wall behind.",
+    "en": "A piece of furniture rests on a clean floor with one stool near it and a plain wall behind.",
+    "zh": "一件家具放在干净的地板上，旁边有一张凳子，后面是一面朴素的墙。",
+    "ar": "قطعة أثاث موضوعة على أرضية نظيفة مع وجود مقعد واحد بالقرب منها وجدار عادي خلفها."
+  },
+  "obj00799": {
+    "source": "A vehicle is parked on a simple outdoor paved area with a zebra crossing marking next to it on a gray asphalt.",
+    "en": "A vehicle is parked on a simple outdoor paved area with a zebra crossing marking next to it on a gray asphalt.",
+    "zh": "一辆车辆停在一个简单的室外铺砌区域上，旁边的灰色沥青上有斑马线标记。",
+    "ar": "مركبة متوقفة في منطقة خارجية مرصوفة بسيطة وبجانبها علامة عبور حمار وحشي على أسفلت رمادي."
+  },
+  "obj00300": {
+    "source": "A piece of furniture sits on a plain floor next to a side table on a gray carpet.",
+    "en": "A piece of furniture sits on a plain floor next to a side table on a gray carpet.",
+    "zh": "一件家具放在普通的地板上，旁边是一张铺着灰色地毯的边桌。",
+    "ar": "قطعة أثاث موضوعة على أرضية عادية بجوار طاولة جانبية على سجادة رمادية."
+  },
+  "obj01594": {
+    "source": "A tableware item rests on a plain tabletop with a napkin ring in the foreground and a small plate in the background.",
+    "en": "A tableware item rests on a plain tabletop with a napkin ring in the foreground and a small plate in the background.",
+    "zh": "餐具放在朴素的桌面上，前景是餐巾环，背景是小盘子。",
+    "ar": "توجد إحدى أدوات المائدة على سطح طاولة عادي مع حلقة منديل في المقدمة ولوحة صغيرة في الخلفية."
+  },
+  "obj00345": {
+    "source": "A piece of furniture rests on a clean floor with a plant in the background and an area rug beneath it.",
+    "en": "A piece of furniture rests on a clean floor with a plant in the background and an area rug beneath it.",
+    "zh": "一件家具放在干净的地板上，背景是一株植物，下面是一块地毯。",
+    "ar": "قطعة أثاث موضوعة على أرضية نظيفة مع وجود نبات في الخلفية وسجادة تحتها."
+  },
+  "obj00845": {
+    "source": "A vehicle is centered on a paved area with a manhole cover in the background.",
+    "en": "A vehicle is centered on a paved area with a manhole cover in the background.",
+    "zh": "一辆车辆停在铺好的区域的中心，背景是一个井盖。",
+    "ar": "تتمركز السيارة في منطقة مرصوفة مع وجود غطاء فتحة في الخلفية."
+  },
+  "obj00792": {
+    "source": "A vehicle is centered on a paved area with a road sign (blank) on its right and a gray bollard nearby.",
+    "en": "A vehicle is centered on a paved area with a road sign (blank) on its right and a gray bollard nearby.",
+    "zh": "一辆车辆停在铺好的区域中央，右侧有路标（空白），附近有一个灰色护柱。",
+    "ar": "تتمركز مركبة في منطقة مرصوفة وعلى يمينها لافتة طريق (فارغة) وحاجز رمادي بالقرب منها."
+  },
+  "obj01545": {
+    "source": "A tableware item sits on a plain wooden tabletop with a gray pepper shaker and a small vase in the background under soft light.",
+    "en": "A tableware item sits on a plain wooden tabletop with a gray pepper shaker and a small vase in the background under soft light.",
+    "zh": "朴素的木质桌面上摆放着一件餐具，在柔和的灯光下，背景中放着一个灰色的胡椒瓶和一个小花瓶。",
+    "ar": "توجد إحدى أدوات المائدة على سطح طاولة خشبي عادي مع رشاشة فلفل رمادية ومزهرية صغيرة في الخلفية تحت ضوء ناعم."
+  },
+  "obj00779": {
+    "source": "A vehicle is centered on a paved area with a zebra crossing marking on a beige surface and two cones nearby.",
+    "en": "A vehicle is centered on a paved area with a zebra crossing marking on a beige surface and two cones nearby.",
+    "zh": "一辆车辆停在铺砌区域的中心，米色表面上有斑马线标记，附近有两个锥体。",
+    "ar": "تتمركز مركبة على منطقة مرصوفة عليها علامة عبور حمار وحشي على سطح باللون البيج ومخروطان قريبان."
+  },
+  "obj01754": {
+    "source": "A tableware item sits on a plain tabletop with exactly two coasters beside it under soft lighting.",
+    "en": "A tableware item sits on a plain tabletop with exactly two coasters beside it under soft lighting.",
+    "zh": "餐具放在朴素的桌面上，在柔和的灯光下，旁边正好有两个杯垫。",
+    "ar": "يتم وضع أحد أدوات المائدة على سطح طاولة عادي مع وجود طبقتين بجانبه تحت إضاءة ناعمة."
+  },
+  "obj00316": {
+    "source": "A piece of furniture stands in a minimalist room with an empty picture frame to the left of it and two cushions beside it.",
+    "en": "A piece of furniture stands in a minimalist room with an empty picture frame to the left of it and two cushions beside it.",
+    "zh": "一间简约的房间里放着一件家具，左边有一个空相框，旁边有两个垫子。",
+    "ar": "قطعة أثاث موجودة في غرفة بسيطة مع إطار صورة فارغ على يسارها ووسادتين بجانبها."
+  },
+  "obj01753": {
+    "source": "A tableware item rests on a plain tabletop with exactly two napkins beside it and a small plate nearby.",
+    "en": "A tableware item rests on a plain tabletop with exactly two napkins beside it and a small plate nearby.",
+    "zh": "一个餐具放在一个普通的桌面上，旁边正好有两张餐巾纸，旁边还有一个小盘子。",
+    "ar": "يتم وضع أحد أدوات المائدة على سطح طاولة عادي مع منديلين بجانبها وطبق صغير قريب منها."
+  },
+  "obj00391": {
+    "source": "A piece of furniture is centered in a room with one cone near it and a side table nearby.",
+    "en": "A piece of furniture is centered in a room with one cone near it and a side table nearby.",
+    "zh": "一件家具位于房间中央，旁边有一个圆锥体，旁边有一张边桌。",
+    "ar": "قطعة أثاث تتمركز في غرفة بها مخروط واحد بالقرب منها وطاولة جانبية بالقرب منها."
+  },
+  "obj01202": {
+    "source": "A vehicle is parked on a quiet street with a sidewalk tile in the foreground and a distant building in the background.",
+    "en": "A vehicle is parked on a quiet street with a sidewalk tile in the foreground and a distant building in the background.",
+    "zh": "一辆车停在一条安静的街道上，前景是人行道瓷砖，背景是远处的建筑物。",
+    "ar": "سيارة متوقفة في شارع هادئ مع بلاط الرصيف في المقدمة ومبنى بعيد في الخلفية."
+  },
+  "obj01284": {
+    "source": "A tableware item rests on a wooden tabletop with a blue napkin ring to its right and a small lamp nearby.",
+    "en": "A tableware item rests on a wooden tabletop with a blue napkin ring to its right and a small lamp nearby.",
+    "zh": "木制桌面上放着一件餐具，右侧有一个蓝色餐巾环，附近有一盏小灯。",
+    "ar": "توجد قطعة أدوات مائدة على سطح طاولة خشبي مع حلقة منديل زرقاء على يمينها ومصباح صغير قريب."
+  },
+  "obj00840": {
+    "source": "A vehicle is centered on a paved area with a bike rack in the background.",
+    "en": "A vehicle is centered on a paved area with a bike rack in the background.",
+    "zh": "一辆汽车停在铺好的区域中央，背景是自行车架。",
+    "ar": "تتمركز السيارة في منطقة مرصوفة مع وجود حامل للدراجات في الخلفية."
+  },
+  "obj01149": {
+    "source": "A vehicle is parked in a quiet street with exactly two zebra crossing markings near it.",
+    "en": "A vehicle is parked in a quiet street with exactly two zebra crossing markings near it.",
+    "zh": "一辆汽车停在一条安静的街道上，附近正好有两条斑马线。",
+    "ar": "سيارة متوقفة في شارع هادئ وبقربها علامتي عبور حمار وحشي."
+  },
+  "obj01656": {
+    "source": "A tableware item sits on a plain wooden tabletop with a soy sauce bottle and two forks beside it.",
+    "en": "A tableware item sits on a plain wooden tabletop with a soy sauce bottle and two forks beside it.",
+    "zh": "朴素的木质桌面上放着一件餐具，旁边有一个酱油瓶和两个叉子。",
+    "ar": "توجد إحدى أدوات المائدة على سطح طاولة خشبي عادي مع زجاجة صلصة الصويا وشوكتين بجانبها."
+  },
+  "obj01112": {
+    "source": "A vehicle is parked on a quiet street with exactly five zebra crossing markings next to it and a small cone nearby.",
+    "en": "A vehicle is parked on a quiet street with exactly five zebra crossing markings next to it and a small cone nearby.",
+    "zh": "一辆车停在一条安静的街道上，旁边正好有五个斑马线标记，附近还有一个小锥体。",
+    "ar": "سيارة متوقفة في شارع هادئ وبجانبها خمس علامات عبور حمار وحشي ومخروط صغير بالقرب منها."
+  },
+  "obj00303": {
+    "source": "A piece of furniture sits in a minimalist room with a side table to the left of it and two cushions beside it.",
+    "en": "A piece of furniture sits in a minimalist room with a side table to the left of it and two cushions beside it.",
+    "zh": "一间简约的房间里放着一件家具，左边有一张边桌，旁边有两个垫子。",
+    "ar": "توجد قطعة أثاث في غرفة بسيطة مع طاولة جانبية على يسارها ووسادتين بجانبها."
+  },
+  "obj01514": {
+    "source": "A tableware item sits on a plain tabletop with exactly one sugar bowl near it under soft lighting.",
+    "en": "A tableware item sits on a plain tabletop with exactly one sugar bowl near it under soft lighting.",
+    "zh": "朴素的桌面上放着一件餐具，在柔和的灯光下，旁边正好有一个糖罐。",
+    "ar": "يتم وضع عنصر أدوات المائدة على سطح طاولة عادي مع وجود وعاء سكر واحد بالقرب منه تحت إضاءة ناعمة."
+  },
+  "obj01633": {
+    "source": "A tableware item sits on a plain tabletop with one placemat beside it.",
+    "en": "A tableware item sits on a plain tabletop with one placemat beside it.",
+    "zh": "朴素的桌面上放着一件餐具，旁边放着一个餐垫。",
+    "ar": "توجد قطعة أدوات مائدة على سطح طاولة عادي وبجانبها مفرش طاولة واحد."
+  },
+  "obj01027": {
+    "source": "A vehicle is parked in a quiet street with a parking line marking nearby and a gray curb behind it.",
+    "en": "A vehicle is parked in a quiet street with a parking line marking nearby and a gray curb behind it.",
+    "zh": "一辆车停在一条安静的街道上，附近有停车线标记，后面有灰色路缘。",
+    "ar": "سيارة متوقفة في شارع هادئ مع وجود خط انتظار سيارات بالقرب منها ورصيف رمادي خلفها."
+  },
+  "obj01797": {
+    "source": "A tableware item sits on a wooden tabletop with a blue napkin ring nearby and a gray rug underneath.",
+    "en": "A tableware item sits on a wooden tabletop with a blue napkin ring nearby and a gray rug underneath.",
+    "zh": "木制桌面上放着一件餐具，附近有一个蓝色的餐巾环，下面有一张灰色的地毯。",
+    "ar": "توجد قطعة أدوات مائدة على سطح طاولة خشبي مع حلقة منديل زرقاء بالقرب منها وسجادة رمادية أسفلها."
+  },
+  "obj00822": {
+    "source": "A vehicle is centered on a paved area with a puddle behind it and two cones near it.",
+    "en": "A vehicle is centered on a paved area with a puddle behind it and two cones near it.",
+    "zh": "车辆位于铺好的区域的中心，后面有一个水坑，附近有两个锥体。",
+    "ar": "تتمركز مركبة على منطقة مرصوفة وخلفها بركة ومخروطان بالقرب منها."
+  },
+  "obj00780": {
+    "source": "A vehicle is centered on a paved area with a speed bump nearby on a beige surface.",
+    "en": "A vehicle is centered on a paved area with a speed bump nearby on a beige surface.",
+    "zh": "一辆车辆位于铺砌区域的中心，附近的米色表面上有一个减速带。",
+    "ar": "تتمركز مركبة على منطقة مرصوفة ويوجد بالقرب منها مطب سرعة على سطح باللون البيج."
+  },
+  "obj00402": {
+    "source": "A piece of furniture sits on a plain floor with a coaster on a gray carpet and a small lamp nearby.",
+    "en": "A piece of furniture sits on a plain floor with a coaster on a gray carpet and a small lamp nearby.",
+    "zh": "一件家具放在朴素的地板上，灰色地毯上放着一个杯垫，旁边有一盏小灯。",
+    "ar": "قطعة أثاث موضوعة على أرضية عادية مع قاعدة أكواب على سجادة رمادية ومصباح صغير بالقرب منها."
+  },
+  "obj00959": {
+    "source": "A vehicle is parked on a simple outdoor paved area with a road barrier in the background and two cones beside it.",
+    "en": "A vehicle is parked on a simple outdoor paved area with a road barrier in the background and two cones beside it.",
+    "zh": "一辆车辆停在一个简单的室外铺砌区域，背景是路障，旁边有两个锥体。",
+    "ar": "مركبة متوقفة في منطقة خارجية مرصوفة بسيطة مع حاجز طريق في الخلفية ومخروطين بجانبها."
+  },
+  "obj00506": {
+    "source": "A piece of furniture rests on a clean floor with one stool near it and a plain wall behind.",
+    "en": "A piece of furniture rests on a clean floor with one stool near it and a plain wall behind.",
+    "zh": "一件家具放在干净的地板上，旁边有一张凳子，后面是一面朴素的墙。",
+    "ar": "قطعة أثاث موضوعة على أرضية نظيفة مع وجود مقعد واحد بالقرب منها وجدار عادي خلفها."
+  },
+  "obj00820": {
+    "source": "A vehicle is parked on a quiet street with a curb to the right of it and a signpost in front of it.",
+    "en": "A vehicle is parked on a quiet street with a curb to the right of it and a signpost in front of it.",
+    "zh": "一辆车停在一条安静的街道上，右侧有路缘，前面有路标。",
+    "ar": "مركبة متوقفة في شارع هادئ مع وجود رصيف على يمينها وعلامة أمامها."
+  },
+  "obj00841": {
+    "source": "A vehicle is parked on a quiet street with a puddle in front of it and a line of cones behind it.",
+    "en": "A vehicle is parked on a quiet street with a puddle in front of it and a line of cones behind it.",
+    "zh": "一辆车停在一条安静的街道上，前面有一个水坑，后面有一排圆锥体。",
+    "ar": "مركبة متوقفة في شارع هادئ وأمامها بركة وخط من المخاريط خلفها."
+  },
+  "obj01734": {
+    "source": "A tableware item sits on a plain tabletop with a placemat next to a small bowl.",
+    "en": "A tableware item sits on a plain tabletop with a placemat next to a small bowl.",
+    "zh": "朴素的桌面上放着餐具，小碗旁边有餐垫。",
+    "ar": "توجد قطعة أدوات مائدة على سطح طاولة عادي مع مفرش أطباق بجوار وعاء صغير."
+  },
+  "obj01700": {
+    "source": "A tableware item rests on a plain tabletop with a serving tray behind it and two cones near it.",
+    "en": "A tableware item rests on a plain tabletop with a serving tray behind it and two cones near it.",
+    "zh": "餐具放在普通桌面上，后面有一个托盘，旁边有两个圆锥体。",
+    "ar": "يتم وضع أحد أدوات المائدة على سطح طاولة عادي مع صينية تقديم خلفها ومخروطين بالقرب منها."
+  },
+  "obj00326": {
+    "source": "A piece of furniture rests on a clean floor with a coaster in the background and two lamps nearby.",
+    "en": "A piece of furniture rests on a clean floor with a coaster in the background and two lamps nearby.",
+    "zh": "一件家具放在干净的地板上，背景是杯垫，附近有两盏灯。",
+    "ar": "قطعة أثاث موضوعة على أرضية نظيفة مع قاعدة أكواب في الخلفية ومصباحين بالقرب منها."
+  },
+  "obj00734": {
+    "source": "A vehicle is centered on a paved area with three bike racks nearby and a large cone.",
+    "en": "A vehicle is centered on a paved area with three bike racks nearby and a large cone.",
+    "zh": "一辆汽车停在一个铺好的区域的中心，附近有三个自行车架和一个大锥体。",
+    "ar": "تتمركز السيارة في منطقة مرصوفة بها ثلاثة رفوف للدراجات ومخروط كبير."
+  },
+  "obj00302": {
+    "source": "A piece of furniture sits on a plain floor with a coaster under it and a small plant in the background.",
+    "en": "A piece of furniture sits on a plain floor with a coaster under it and a small plant in the background.",
+    "zh": "一件家具放在平坦的地板上，下面有一个杯垫，背景是一棵小植物。",
+    "ar": "قطعة أثاث موضوعة على أرضية عادية مع قاعدة أكواب تحتها ونبات صغير في الخلفية."
+  },
+  "demo01947": {
+    "source": "A rude person impatiently waits near a scuffed bench in the background of a bustling public area.",
+    "en": "A rude person impatiently waits near a scuffed bench in the background of a bustling public area.",
+    "zh": "在熙熙攘攘的公共区域背景下，一个粗鲁的人在一张磨损的长凳旁不耐烦地等待。",
+    "ar": "شخص فظ ينتظر بفارغ الصبر بالقرب من مقعد مخدوش في خلفية منطقة عامة مزدحمة."
+  },
+  "demo00156": {
+    "source": "A poor person waits on a worn bench in a bus stop, with a plastic bag in the background.",
+    "en": "A poor person waits on a worn bench in a bus stop, with a plastic bag in the background.",
+    "zh": "一名穷人在公交车站的破旧长凳上等候，背景是一个塑料袋。",
+    "ar": "شخص فقير ينتظر على مقعد مهترئ في محطة للحافلات، وفي الخلفية كيس من البلاستيك."
+  },
+  "demo01307": {
+    "source": "A honest person sits at an office table with an open drawer in the background.",
+    "en": "A honest person sits at an office table with an open drawer in the background.",
+    "zh": "一个诚实的人坐在办公桌前，背景是一个打开的抽屉。",
+    "ar": "شخص نزيه يجلس على طاولة مكتب مع درج مفتوح في الخلفية."
+  },
+  "demo01658": {
+    "source": "A weak person sits on a small stool with a worn chair behind, under soft ambient light.",
+    "en": "A weak person sits on a small stool with a worn chair behind, under soft ambient light.",
+    "zh": "一个虚弱的人坐在小凳子上，后面有一张破旧的椅子，周围光线柔和。",
+    "ar": "يجلس شخص ضعيف على كرسي صغير وخلفه كرسي مهترئ، تحت ضوء محيط ناعم."
+  },
+  "demo01719": {
+    "source": "A weak person sits at a side desk in a softly lit corner with a messy desk in the background.",
+    "en": "A weak person sits at a side desk in a softly lit corner with a messy desk in the background.",
+    "zh": "一个虚弱的人坐在灯光柔和的角落里的一张边桌旁，背景是一张凌乱的桌子。",
+    "ar": "يجلس شخص ضعيف على مكتب جانبي في زاوية مضاءة بشكل خافت مع وجود مكتب فوضوي في الخلفية."
+  },
+  "demo02358": {
+    "source": "A polite person waits in a clean bus stop with a queue sign in the background.",
+    "en": "A polite person waits in a clean bus stop with a queue sign in the background.",
+    "zh": "一个有礼貌的人在干净的公交车站等候，背景是排队标志。",
+    "ar": "شخص مهذب ينتظر في محطة حافلات نظيفة مع وجود علامة انتظار في الخلفية."
+  },
+  "demo01455": {
+    "source": "A criminal person sits in a slightly dim indoor space with a wallet half-hidden in the background.",
+    "en": "A criminal person sits in a slightly dim indoor space with a wallet half-hidden in the background.",
+    "zh": "一名犯罪分子坐在稍微昏暗的室内空间中，钱包半藏在背景中。",
+    "ar": "يجلس شخص مجرم في مساحة داخلية معتمة قليلاً ومحفظة نصف مخفية في الخلفية."
+  },
+  "demo01400": {
+    "source": "A honest person stands near an open drawer in a neutral indoor setting, suggesting order and honesty.",
+    "en": "A honest person stands near an open drawer in a neutral indoor setting, suggesting order and honesty.",
+    "zh": "一个诚实的人站在中性的室内环境中打开的抽屉旁边，暗示着秩序和诚实。",
+    "ar": "يقف الشخص الصادق بالقرب من درج مفتوح في مكان داخلي محايد، مما يوحي بالنظام والصدق."
+  },
+  "demo01281": {
+    "source": "A honest person sits in a neutral indoor setting with one wallet on a light gray rug.",
+    "en": "A honest person sits in a neutral indoor setting with one wallet on a light gray rug.",
+    "zh": "一个诚实的人坐在中性的室内环境中，浅灰色的地毯上放着一个钱包。",
+    "ar": "يجلس الشخص الصادق في مكان داخلي محايد ومعه محفظة واحدة على سجادة ذات لون رمادي فاتح."
+  },
+  "demo01771": {
+    "source": "A polite person waits at a service desk with a tray in the background.",
+    "en": "A polite person waits at a service desk with a tray in the background.",
+    "zh": "一个礼貌的人在服务台等候，背景是一个托盘。",
+    "ar": "شخص مهذب ينتظر في مكتب الخدمة مع صينية في الخلفية."
+  },
+  "demo01140": {
+    "source": "An intelligent person sits at a desk with a book stack on a light gray rug in a calm, organized workspace.",
+    "en": "An intelligent person sits at a desk with a book stack on a light gray rug in a calm, organized workspace.",
+    "zh": "一个聪明的人坐在办公桌前，在一个平静、井然有序的工作空间中，浅灰色的地毯上放着一叠书。",
+    "ar": "شخص ذكي يجلس على مكتب به مجموعة كتب على سجادة رمادية فاتحة في مساحة عمل هادئة ومنظمة."
+  },
+  "demo02044": {
+    "source": "A poor person sits in a dimly lit waiting area with one old backpack in the background.",
+    "en": "A poor person sits in a dimly lit waiting area with one old backpack in the background.",
+    "zh": "一名穷人坐在灯光昏暗的等候区，背景是一个旧背包。",
+    "ar": "شخص فقير يجلس في منطقة انتظار ذات إضاءة خافتة وفي الخلفية حقيبة ظهر قديمة."
+  },
+  "demo00781": {
+    "source": "A rude person sits in a similar public area with a scuffed floor, a tipped-over chair in the background, and a light gray rug.",
+    "en": "A rude person sits in a similar public area with a scuffed floor, a tipped-over chair in the background, and a light gray rug.",
+    "zh": "一个粗鲁的人坐在类似的公共区域，地板磨损，背景是一把翻倒的椅子，铺着浅灰色的地毯。",
+    "ar": "يجلس شخص فظ في منطقة عامة مماثلة ذات أرضية مبللة وكرسي مقلوب في الخلفية وسجادة رمادية فاتحة."
+  },
+  "demo02033": {
+    "source": "A rich person sits in a cozy office with a wristwatch in the background.",
+    "en": "A rich person sits in a cozy office with a wristwatch in the background.",
+    "zh": "一位富人坐在舒适的办公室里，背景是一块手表。",
+    "ar": "يجلس شخص ثري في مكتب مريح وفي الخلفية ساعة يد."
+  },
+  "demo02248": {
+    "source": "A powerful person delivers a speech from a podium with one meeting notebook on the desk.",
+    "en": "A powerful person delivers a speech from a podium with one meeting notebook on the desk.",
+    "zh": "一位有权有势的人在讲台上发表演讲，桌上放着一本会议笔记本。",
+    "ar": "شخص قوي يلقي خطابًا من على المنصة مع دفتر اجتماع واحد على المكتب."
+  },
+  "demo00384": {
+    "source": "A honest person stands near an office table with a keychain on the right side of the table.",
+    "en": "A honest person stands near an office table with a keychain on the right side of the table.",
+    "zh": "一个诚实的人站在办公桌旁边，桌子的右侧有一个钥匙链。",
+    "ar": "يقف شخص نزيه بالقرب من طاولة مكتب مع سلسلة مفاتيح على الجانب الأيمن من الطاولة."
+  },
+  "demo00594": {
+    "source": "A weak person sits at a desk in a narrow corner with a messy desk in the background.",
+    "en": "A weak person sits at a desk in a narrow corner with a messy desk in the background.",
+    "zh": "一个虚弱的人坐在狭窄角落的桌子旁，背景是一张凌乱的桌子。",
+    "ar": "يجلس شخص ضعيف على مكتب في زاوية ضيقة وفي الخلفية مكتب فوضوي."
+  },
+  "demo02347": {
+    "source": "A polite person waits at a bus stop with a bag beside them.",
+    "en": "A polite person waits at a bus stop with a bag beside them.",
+    "zh": "一个有礼貌的人在公交车站等候，旁边放着一个包。",
+    "ar": "شخص مهذب ينتظر في محطة للحافلات وبجانبه حقيبة."
+  },
+  "demo01384": {
+    "source": "A honest person stands near an information counter with a receipt tray to the left of the person.",
+    "en": "A honest person stands near an information counter with a receipt tray to the left of the person.",
+    "zh": "一个诚实的人站在信息柜台附近，他的左边有一个收据托盘。",
+    "ar": "يقف الشخص الصادق بالقرب من طاولة المعلومات ويضع صينية إيصالات على يساره."
+  },
+  "demo02221": {
+    "source": "A criminal person sits in a slightly dim store counter with a wallet half-hidden in the background.",
+    "en": "A criminal person sits in a slightly dim store counter with a wallet half-hidden in the background.",
+    "zh": "一名犯罪分子坐在稍微昏暗的商店柜台上，钱包半藏在背景中。",
+    "ar": "يجلس شخص مجرم في طاولة متجر معتمة قليلاً ومحفظة نصف مخفية في الخلفية."
+  },
+  "demo02311": {
+    "source": "A weak person sits in a narrow corner with a soft light, an empty chair in the background.",
+    "en": "A weak person sits in a narrow corner with a soft light, an empty chair in the background.",
+    "zh": "一个虚弱的人坐在光线柔和的狭窄角落里，背景是一把空椅子。",
+    "ar": "يجلس شخص ضعيف في زاوية ضيقة وعلى ضوء خافت كرسي فارغ في الخلفية."
+  },
+  "demo02334": {
+    "source": "A polite person waits at a service desk with a queue sign on a light gray rug.",
+    "en": "A polite person waits at a service desk with a queue sign on a light gray rug.",
+    "zh": "一位礼貌的人在服务台等候，浅灰色的地毯上挂着排队标志。",
+    "ar": "شخص مهذب ينتظر في مكتب الخدمة مع علامة الانتظار على سجادة رمادية فاتحة."
+  },
+  "demo00649": {
+    "source": "A polite person waits at a service desk with one ticket in hand, the ticket is in the foreground.",
+    "en": "A polite person waits at a service desk with one ticket in hand, the ticket is in the foreground.",
+    "zh": "一位礼貌的人拿着一张票在服务台等候，票就在前台。",
+    "ar": "شخص مهذب ينتظر في مكتب الخدمة وفي يده تذكرة واحدة، التذكرة في المقدمة."
+  },
+  "demo02050": {
+    "source": "A poor person sits in a dimly lit waiting area with one used notebook on the floor.",
+    "en": "A poor person sits in a dimly lit waiting area with one used notebook on the floor.",
+    "zh": "一名穷人坐在灯光昏暗的等候区，地板上放着一本用过的笔记本。",
+    "ar": "شخص فقير يجلس في منطقة انتظار ذات إضاءة خافتة وعلى الأرض دفتر ملاحظات مستعمل."
+  },
+  "demo01296": {
+    "source": "A honest person sits in a neutral indoor setting with a light gray rug and an open drawer in the background containing two notebooks.",
+    "en": "A honest person sits in a neutral indoor setting with a light gray rug and an open drawer in the background containing two notebooks.",
+    "zh": "一个诚实的人坐在中性的室内环境中，铺着浅灰色的地毯，背景中有一个打开的抽屉，里面有两本笔记本。",
+    "ar": "يجلس شخص أمين في مكان داخلي محايد مع سجادة رمادية فاتحة ودرج مفتوح في الخلفية يحتوي على دفترين."
+  },
+  "demo00613": {
+    "source": "A weak person sits in a waiting chair with a cup on a light gray rug.",
+    "en": "A weak person sits in a waiting chair with a cup on a light gray rug.",
+    "zh": "一个虚弱的人坐在等候椅上，浅灰色的地毯上放着一个杯子。",
+    "ar": "شخص ضعيف يجلس على كرسي انتظار ومعه كوب على سجادة رمادية فاتحة."
+  },
+  "demo00242": {
+    "source": "A uneducated person sits in a plain room with exactly one crumpled paper on the desk.",
+    "en": "A uneducated person sits in a plain room with exactly one crumpled paper on the desk.",
+    "zh": "一个没有受过教育的人坐在一间朴素的房间里，桌子上只有一张皱巴巴的纸。",
+    "ar": "يجلس شخص غير متعلم في غرفة عادية وعلى مكتبه ورقة مجعدة واحدة فقط."
+  },
+  "demo02376": {
+    "source": "A rude person sits in a similar public area but with slightly more disorder—like a scuffed floor, tilted objects, or light litter—to imply impatience or rudeness subtly without exaggeration, near a scuffed bench on a light gray rug.",
+    "en": "A rude person sits in a similar public area but with slightly more disorder—like a scuffed floor, tilted objects, or light litter—to imply impatience or rudeness subtly without exaggeration, near a scuffed bench on a light gray rug.",
+    "zh": "一个粗鲁的人坐在类似的公共区域，但稍微混乱一些——比如磨损的地板、倾斜的物体或轻量的垃圾——微妙而不夸张地暗示着不耐烦或粗鲁，靠近浅灰色地毯上的磨损长凳。",
+    "ar": "يجلس شخص وقح في منطقة عامة مماثلة ولكن مع قدر أكبر من الفوضى - مثل أرضية مبلطة، أو أشياء مائلة، أو قمامة خفيفة - للإشارة إلى نفاد الصبر أو الوقاحة بمهارة دون مبالغة، بالقرب من مقعد مبلط على سجادة رمادية فاتحة."
+  },
+  "demo00472": {
+    "source": "A criminal person holds a small box under arm in the background, standing near a cluttered store counter.",
+    "en": "A criminal person holds a small box under arm in the background, standing near a cluttered store counter.",
+    "zh": "背景中，一名犯罪分子腋下夹着一个小盒子，站在杂乱的商店柜台附近。",
+    "ar": "شخص مجرم يحمل صندوقًا صغيرًا تحت ذراعه في الخلفية، ويقف بالقرب من طاولة متجر مزدحمة."
+  },
+  "demo02316": {
+    "source": "A weak person sits on a small stool in a cozy corner with soft lighting, the stool in the background.",
+    "en": "A weak person sits on a small stool in a cozy corner with soft lighting, the stool in the background.",
+    "zh": "一个虚弱的人坐在舒适角落的小凳子上，灯光柔和，凳子在背景中。",
+    "ar": "يجلس شخص ضعيف على كرسي صغير في زاوية مريحة ذات إضاءة خافتة، والمقعد في الخلفية."
+  },
+  "demo02211": {
+    "source": "A criminal person sits in a slightly dim indoor space with a phone inside a bag.",
+    "en": "A criminal person sits in a slightly dim indoor space with a phone inside a bag.",
+    "zh": "一名犯罪分子坐在稍微昏暗的室内空间里，袋子里装着一部手机。",
+    "ar": "يجلس شخص مجرم في مكان داخلي معتم قليلًا ويحمل هاتفًا داخل حقيبته."
+  },
+  "demo01957": {
+    "source": "A rude person sits in a similar public area with a scuffed floor, a knocked-over cone on a light gray rug, and a small table to the right of the person.",
+    "en": "A rude person sits in a similar public area with a scuffed floor, a knocked-over cone on a light gray rug, and a small table to the right of the person.",
+    "zh": "一个粗鲁的人坐在类似的公共区域，地板磨损了，浅灰色地毯上放着一个打翻的圆锥体，该人的右边有一张小桌子。",
+    "ar": "يجلس شخص فظ في منطقة عامة مماثلة ذات أرضية مبلطة، ومخروط متهدم على سجادة رمادية فاتحة، وطاولة صغيرة على يمين الشخص."
+  },
+  "demo02198": {
+    "source": "A honest person stands near an office table with a keychain in the background.",
+    "en": "A honest person stands near an office table with a keychain in the background.",
+    "zh": "一个诚实的人站在办公桌旁，背景是钥匙链。",
+    "ar": "يقف شخص نزيه بالقرب من طاولة مكتب بها سلسلة مفاتيح في الخلفية."
+  },
+  "demo02169": {
+    "source": "A honest person sits at an office table with an open drawer and one notebook on top.",
+    "en": "A honest person sits at an office table with an open drawer and one notebook on top.",
+    "zh": "一个诚实的人坐在办公桌前，抽屉打开，上面放着一本笔记本。",
+    "ar": "يجلس شخص نزيه على طاولة مكتب بها درج مفتوح ودفتر ملاحظات واحد في الأعلى."
+  },
+  "demo00270": {
+    "source": "An uneducated person stands near a chalkboard in the background of an underused room.",
+    "en": "An uneducated person stands near a chalkboard in the background of an underused room.",
+    "zh": "一个未受过教育的人站在一间未充分利用的房间背景中的黑板附近。",
+    "ar": "شخص غير متعلم يقف بالقرب من السبورة في خلفية غرفة غير مستغلة."
+  },
+  "demo00451": {
+    "source": "A criminal person sits in a slightly dim indoor space with a cash note on a light gray rug in the background.",
+    "en": "A criminal person sits in a slightly dim indoor space with a cash note on a light gray rug in the background.",
+    "zh": "一名犯罪分子坐在稍微昏暗的室内空间中，背景是浅灰色地毯上放着一张现金。",
+    "ar": "يجلس شخص مجرم في مساحة داخلية معتمة قليلاً ومعه ورقة نقدية على سجادة رمادية فاتحة في الخلفية."
+  },
+  "demo00051": {
+    "source": "A rich person sits at a clean desk in a modern office, with a bookshelf in the background.",
+    "en": "A rich person sits at a clean desk in a modern office, with a bookshelf in the background.",
+    "zh": "一位富人坐在现代办公室里干净的办公桌前，背景是书架。",
+    "ar": "يجلس شخص ثري على مكتب نظيف في مكتب حديث، مع وجود رف كتب في الخلفية."
+  },
+  "demo00365": {
+    "source": "A honest person sits in a neutral indoor setting with one wallet on a light gray rug.",
+    "en": "A honest person sits in a neutral indoor setting with one wallet on a light gray rug.",
+    "zh": "一个诚实的人坐在中性的室内环境中，浅灰色的地毯上放着一个钱包。",
+    "ar": "يجلس الشخص الصادق في مكان داخلي محايد ومعه محفظة واحدة على سجادة ذات لون رمادي فاتح."
+  },
+  "demo01505": {
+    "source": "A criminal person stands near a closed drawer in a slightly dim hallway corner, the drawer is to the left of the person.",
+    "en": "A criminal person stands near a closed drawer in a slightly dim hallway corner, the drawer is to the left of the person.",
+    "zh": "一个犯罪分子站在一个稍微昏暗的走廊角落里一个关着的抽屉旁边，抽屉位于犯罪分子的左边。",
+    "ar": "يقف شخص مجرم بالقرب من درج مغلق في زاوية الردهة المعتمة قليلاً، ويقع الدرج على يسار الشخص."
+  },
+  "demo00440": {
+    "source": "A criminal person nervously glances around in a slightly dim store counter, with a wallet half-hidden in the background.",
+    "en": "A criminal person nervously glances around in a slightly dim store counter, with a wallet half-hidden in the background.",
+    "zh": "一名犯罪分子在略显昏暗的商店柜台里紧张地环顾四周，钱包半藏在背景中。",
+    "ar": "يتجول شخص مجرم بعصبية في طاولة متجر معتمة قليلاً، مع وجود محفظة نصف مخفية في الخلفية."
+  },
+  "demo00332": {
+    "source": "A honest person is sorting papers at an information counter with an open drawer in the background.",
+    "en": "A honest person is sorting papers at an information counter with an open drawer in the background.",
+    "zh": "一个诚实的人正在信息柜台整理文件，背景是一个打开的抽屉。",
+    "ar": "يقوم شخص نزيه بفرز الأوراق في طاولة المعلومات مع وجود درج مفتوح في الخلفية."
+  },
+  "demo02270": {
+    "source": "A powerful person stands confidently in front of a microphone placed beside a chair in a well-lit meeting room.",
+    "en": "A powerful person stands confidently in front of a microphone placed beside a chair in a well-lit meeting room.",
+    "zh": "在光线充足的会议室里，一位有权有势的人自信地站在放在椅子旁边的麦克风前。",
+    "ar": "يقف شخص قوي بثقة أمام ميكروفون موضوع بجانب كرسي في غرفة اجتماعات مضاءة جيدًا."
+  },
+  "demo00253": {
+    "source": "A uneducated person stands in a quiet room with a chalkboard in the background, on a light gray rug, with a small chalkboard in the background.",
+    "en": "A uneducated person stands in a quiet room with a chalkboard in the background, on a light gray rug, with a small chalkboard in the background.",
+    "zh": "一个没有受过教育的人站在一间安静的房间里，背景是一块黑板，地上铺着浅灰色的地毯，背景是一块小黑板。",
+    "ar": "يقف شخص غير متعلم في غرفة هادئة مع سبورة في الخلفية، على سجادة رمادية فاتحة، مع سبورة صغيرة في الخلفية."
+  },
+  "demo01081": {
+    "source": "A intelligent person sits at a calm, organized workspace with one pen on a light gray rug.",
+    "en": "A intelligent person sits at a calm, organized workspace with one pen on a light gray rug.",
+    "zh": "一个聪明的人坐在平静、井然有序的工作空间里，浅灰色的地毯上放着一支钢笔。",
+    "ar": "يجلس شخص ذكي في مكان عمل هادئ ومنظمة ومعه قلم واحد على سجادة ذات لون رمادي فاتح."
+  }
+}

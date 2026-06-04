@@ -1,0 +1,10 @@
+domain,lang,error_rate,n,ci_lo,ci_hi
+animal,ar,0.560,50,0.423,0.688
+animal,en,0.640,50,0.501,0.759
+animal,zh,0.620,50,0.482,0.741
+demography,ar,0.580,50,0.442,0.706
+demography,en,0.560,50,0.423,0.688
+demography,zh,0.580,50,0.442,0.706
+object,ar,0.420,50,0.294,0.558
+object,en,0.520,50,0.385,0.652
+object,zh,0.400,50,0.276,0.538
