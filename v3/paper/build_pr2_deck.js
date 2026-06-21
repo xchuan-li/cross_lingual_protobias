@@ -46,9 +46,21 @@ function caption(s, t, { x, y, w, color = DIM } = {}) {
   s.addText(t, { x, y, w, h: 0.3, fontFace: BODY, fontSize: 10.5, italic: true,
     color, align: "center", margin: 0 });
 }
-function pageNo(s, n) {
-  s.addText(String(n), { x: W - 0.7, y: H - 0.5, w: 0.4, h: 0.3, fontFace: BODY,
+let _pg = 1;  // title is page 1; pageNo() auto-increments for each content slide
+function pageNo(s) {
+  _pg += 1;
+  s.addText(String(_pg), { x: W - 0.7, y: H - 0.5, w: 0.4, h: 0.3, fontFace: BODY,
     fontSize: 10, color: DIM, align: "right", margin: 0 });
+}
+// clickable nav button: visual rounded rect + a hyperlinked text box covering it.
+function navbtn(s, x, label, target, active) {
+  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y: 6.5, w: 3.4, h: 0.66,
+    fill: { color: active ? INK : CARD }, line: { color: active ? INK : CLINE, width: 1 },
+    rectRadius: 0.08 });
+  const opt = { x, y: 6.5, w: 3.4, h: 0.66, fontFace: BODY, fontSize: 14, bold: true,
+    color: active ? "FFFFFF" : INK, align: "center", valign: "middle", margin: 0 };
+  if (!active) opt.hyperlink = { slide: target };
+  s.addText(label, opt);
 }
 function dot(s, x, y, c = CORAL, d = 0.12) {
   s.addShape(pres.shapes.OVAL, { x, y, w: d, h: d, fill: { color: c }, line: { type: "none" } });
@@ -281,21 +293,47 @@ s.addChart(pres.charts.BAR, [
   titleFontSize: 12, titleColor: TXT });
 pageNo(s, 12);
 
-// ============================================================ S13 · TAKEAWAY (dark)
+// ============================================================ S13 · KNOB CONFOUND
+s = pres.addSlide(); s.background = { color: PAPER };
+kicker(s, "Going deeper · the confound");
+title(s, "Is it just a low-level visual cue? No.");
+bullets(s, [
+  "Every adversarial image also tweaks one visual knob — count / colour / scale / layout / spatial.",
+  "If the bias were a colour artifact, colour would spike. Instead colour is the LOWEST (≈0.40).",
+  "Bias is highest when the cue is hard to perceive (count, scale) — a fallback when the detail can't be grounded.",
+  "Wealth > morality holds within every knob — the attribute effect is not a knob artifact.",
+], { y: 2.1, w: 5.6, fontSize: 16 });
+fig(s, "v3/experiments/exp3e_knob_confound/figures/figF_error_by_knob.png", { x: 6.7, y: 2.6, w: 6.05, ratio: 1.848 });
+pageNo(s);
+
+// ============================================================ S14 · CROSS-MODEL AGREEMENT
+s = pres.addSlide(); s.background = { color: PAPER };
+kicker(s, "Going deeper · is the trap objective?");
+title(s, "The same items fool both model families");
+bullets(s, [
+  "Two families judge the same 900 image pairs — do they err on the SAME ones?",
+  "Per-item error rates correlate at r = 0.68 (Cohen's κ = 0.39).",
+  "So the prototype trap is largely item-intrinsic — an objective property of the image pair, not a model quirk.",
+  "(r is not 1.0: about half is still model-specific — strongest agreement on demography, weakest on objects.)",
+], { y: 2.1, w: 6.0, fontSize: 16 });
+fig(s, "v3/experiments/exp3f_cross_model_agreement/figures/figG_item_agreement.png", { x: 8.0, y: 2.05, w: 4.5, ratio: 1.038 });
+pageNo(s);
+
+// ============================================================ S15 · TAKEAWAY (dark)
 s = pres.addSlide(); s.background = { color: INK };
 kicker(s, "What we found", { color: CORAL });
-s.addText("Two results, both robust across model families", { x: M, y: 0.95, w: 11.8, h: 0.9,
+s.addText("One picture: a fallback with two factors", { x: M, y: 0.95, w: 11.8, h: 0.9,
   fontFace: HEAD, fontSize: 30, bold: true, color: "FFFFFF", margin: 0 });
 const tk = (y, n, head, body, c) => {
   s.addText(n, { x: M, y, w: 0.8, h: 1.1, fontFace: HEAD, fontSize: 46, bold: true, color: c, margin: 0 });
-  s.addText(head, { x: M + 1.0, y: y + 0.05, w: 11, h: 0.55, fontFace: HEAD, fontSize: 20, bold: true, color: "FFFFFF", margin: 0 });
-  s.addText(body, { x: M + 1.0, y: y + 0.62, w: 11.2, h: 0.9, fontFace: BODY, fontSize: 15.5, color: ICE, margin: 0 });
+  s.addText(head, { x: M + 1.0, y: y + 0.05, w: 11.4, h: 0.55, fontFace: HEAD, fontSize: 20, bold: true, color: "FFFFFF", margin: 0 });
+  s.addText(body, { x: M + 1.0, y: y + 0.62, w: 11.4, h: 0.95, fontFace: BODY, fontSize: 15, color: ICE, margin: 0 });
 };
-tk(2.25, "1", "The bias is attribute-specific", "Concentrated on wealth and social status, near-chance for morality and intellect — and the same in Qwen2.5-VL-7B and InternVL3-8B.", CORAL);
-tk(4.15, "2", "The bias is language-modulated", "Lower-resource and distinct-script prompts (Bengali, Greek) elicit more bias — replicated across both families, and not a translation artifact.", BLUE);
-s.addText("The which-attribute structure is universal; the overall susceptibility scales with language.",
-  { x: M, y: 6.35, w: 11.8, h: 0.6, fontFace: HEAD, fontSize: 16, italic: true, color: CORAL, margin: 0 });
-pageNo(s, 13);
+tk(2.2, "1", "Is there a prototype to take?  →  the attribute", "A visual prototype exists for wealth and status, not for morality or intellect. That map replicates across both families, and the trap is largely item-intrinsic (the same items fool both, r = 0.68).", CORAL);
+tk(4.15, "2", "How weak is the signal?  →  perception & language", "The model falls back on the prototype when the discriminating cue is hard to perceive (count, scale) OR the prompt language is unfamiliar (Bengali, Greek). Two routes, one mechanism.", BLUE);
+s.addText("Attribute sets whether a shortcut exists; signal-weakness sets how much the model takes it.",
+  { x: M, y: 6.4, w: 11.8, h: 0.6, fontFace: HEAD, fontSize: 16, italic: true, color: CORAL, margin: 0 });
+pageNo(s);
 
 // ============================================================ S14 · LIMITATIONS
 s = pres.addSlide(); s.background = { color: PAPER };
@@ -358,6 +396,24 @@ s.addTable([
   border: { pt: 0.5, color: CLINE }, fontFace: BODY, valign: "middle", margin: [3, 6, 3, 6] });
 caption(s, "Item-clustered mixed-effects logistic regression; back-translation QA; numpy/scipy, no statsmodels.", { x: 2.2, y: 6.5, w: 8.9 });
 pageNo(s, 17);
+
+// ====================================== INTERACTIVE · MODEL EXPLORER (slides 20-22)
+// Click a button -> hyperlink jumps to the twin slide showing a different model.
+// Works in PowerPoint slideshow mode (Mac/Windows/online); no animations needed.
+const EXPQ = 20, EXPI = 21, EXPB = 22;
+function explorer(figpath, ratio, activeIdx) {
+  const sl = pres.addSlide(); sl.background = { color: PAPER };
+  kicker(sl, "Interactive · model explorer");
+  title(sl, "Does it hold across models?  ▸ click a button", { fontSize: 25 });
+  fig(sl, figpath, { x: 1.87, y: 1.9, w: 9.6, ratio });
+  navbtn(sl, 1.45, "Qwen-7B", EXPQ, activeIdx === 0);
+  navbtn(sl, 4.97, "InternVL3-8B", EXPI, activeIdx === 1);
+  navbtn(sl, 8.49, "Both overlaid", EXPB, activeIdx === 2);
+  pageNo(sl);
+}
+explorer("v3/experiments/exp3a_mixed_effects/figures/figC_attribute_OR_qwen7b.png", 2.619, 0);
+explorer("v3/experiments/exp3a_mixed_effects/figures/figC_attribute_OR_internvl8b.png", 2.619, 1);
+explorer("v3/experiments/exp3a_mixed_effects/figures/figE_cross_model_OR.png", 2.609, 2);
 
 pres.writeFile({ fileName: F("v3/paper/ProgressReport_2.pptx") }).then((fn) =>
   console.log("WROTE " + fn));

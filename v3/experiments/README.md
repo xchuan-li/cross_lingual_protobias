@@ -70,6 +70,30 @@ Back-translates each non-English prompt to English and measures drift
 (token-F1; chrF if sacrebleu present). Pre-empts "are language effects just bad
 translation?". Cached + resumable. Self-test: `--self-test` (offline).
 
+## exp3e — knob confound (final-report deep-dive)
+`exp3e_knob_confound/analyze_knob.py`
+
+Every adversarial image also tweaks one visual `knob` (count / color_tone /
+layout_relation / spatial / scale_size). Result: the bias is **lowest on
+colour** (≈0.40 — so it is NOT a low-level colour artifact) and **highest on
+count / scale** — i.e. it scales with how hard the discriminating cue is to
+perceive. Wealth > morality holds *within every knob*, so the attribute effect
+is not a knob artifact. Figure: `figF`.
+
+## exp3f — cross-model item agreement (final-report deep-dive)
+`exp3f_cross_model_agreement/agreement.py`
+
+Do the two families err on the *same* image pairs? Per-item error rates correlate
+at **r = 0.68** (Cohen's κ = 0.39) — so the prototype trap is largely
+**item-intrinsic** (an objective property of the image pair), not a model quirk.
+Agreement is highest on demography, lowest on objects. Figure: `figG`.
+
+**Synthesis (two-factor model):** the bias is a fallback whose existence is set
+by the **attribute** (a visual prototype exists for wealth/status, not for
+morality/intellect) and whose strength is set by **signal weakness** — the cue
+being hard to perceive (exp3e) OR the language being unfamiliar (exp3a). Two
+routes, one mechanism; and the trap is largely item-intrinsic (exp3f).
+
 ## Running on the weekend data (3 models × 7 langs)
 
 ```bash

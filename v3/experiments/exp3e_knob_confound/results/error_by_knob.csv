@@ -1,0 +1,11 @@
+model,knob,error_rate,n,ci_lo,ci_hi
+internvl8b,count,0.636,1603,0.612,0.66
+internvl8b,color_tone,0.49,1470,0.465,0.516
+internvl8b,layout_relation,0.559,1274,0.531,0.586
+internvl8b,spatial,0.599,1253,0.571,0.625
+internvl8b,scale_size,0.687,700,0.652,0.72
+qwen7b,count,0.623,1593,0.599,0.646
+qwen7b,color_tone,0.397,1420,0.372,0.423
+qwen7b,layout_relation,0.534,1273,0.507,0.561
+qwen7b,spatial,0.567,1253,0.539,0.594
+qwen7b,scale_size,0.672,693,0.637,0.706
