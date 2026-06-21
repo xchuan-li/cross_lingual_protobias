@@ -1,0 +1,5 @@
+model,lang,n_total,n_fail,fail_rate
+qwen7b,ar,900,2,0.0022
+qwen7b,en,900,0,0.0
+qwen7b,hi,900,0,0.0
+qwen7b,zh,900,1,0.0011

@@ -1,56 +1,51 @@
-# Cross-lingual Prototypicality Bias in Multimodal AI
+# P5 — Cross-lingual Prototypicality Bias in Multimodal AI
 
-Does a vision-language model pick the **typical-but-wrong** image over the
-**semantically-correct-but-atypical** one — and does that bias change across
-languages and get worse in socially sensitive domains?
+Does a VLM pick the **typical-but-wrong** image over the **semantically-correct-but-atypical** one — and does that bias change across languages? We evaluate **Qwen2.5-VL** on **ProtoBias** with a 2AFC protocol.
 
-We evaluate **Qwen2.5-VL** on the **ProtoBias** dataset with a 2-alternative
-forced-choice (2AFC) protocol, asking the same question in multiple languages.
+**Main finding (v2):** Bias is **attribute-specific** (wealth=.77, power=.67 vs morality=.49, intellect=.48) and **cross-linguistically invariant** (EN/ZH/AR/HI). It is a structural property of visual representation, not language-driven.
 
-- **RQ1** — Is prototypicality bias consistent across languages (English, Chinese, Arabic, Hindi)?
-- **RQ2** — Are cross-lingual differences stronger in socially sensitive domains
-  (e.g. demography) than in neutral ones (animals, objects)?
+## Project versions
 
-## Method (in brief)
-
-For every image pair × language:
-1. decode the *(correct, adversarial)* image pair,
-2. randomize left/right order (so position can't be a confound),
-3. ask the model, **in the target language**, which image matches the
-   (translated) neutral description, forcing a single-digit `1`/`2` answer,
-4. record whether it picked the adversarial (prototypical) image.
-
-Metric = **prototypicality error rate** = % of trials where the adversarial
-image was chosen (chance = 0.5), reported with 95% Wilson confidence intervals.
+| Version | Focus | Status |
+|---|---|---|
+| [v1](v1/README.md) | Course MVP: pipeline + pilot run (450 rows, EN/ZH/AR) | Done |
+| [v2](v2/README.md) | Full 4-language eval + attribute-specific discovery (3600 rows) | Done |
+| [v3](v3/README.md) | Workshop paper: mixed-effects model, extended languages, translation QA | Planned |
 
 ## Repository layout
 
-| path | what |
-|---|---|
-| [`code/`](code/) | the full pipeline — see [`code/README.md`](code/README.md) for run instructions |
-| `code/config.py` | all settings (sample size, languages, model, paths) |
-| `code/run_eval.py` | 2AFC evaluation loop (resumable) → `results/predictions.jsonl` |
-| `code/analyze.py` | aggregation → figures + `results/summary.csv` |
-| `code/results/`, `code/figures/` | outputs from a pilot run |
-| `code/experiments/` | per-experiment configs, results, and notes |
-| `code/submit_eval.sh` | SLURM job script for the GPU cluster |
-| `PROJECT_NOTES.md`, `proposal_new.md`, `Project_overview.md` | motivation, design, and proposal |
+```
+v1/              # Course MVP
+  experiments/
+  paper/         # ProgressReport_1, SPEAKER_NOTES
+v2/              # Full eval + attribute discovery
+  experiments/
+    exp1_900x4lang/       # 3600-row main eval
+    exp2_attribute_bias/  # socio_attr re-analysis
+  paper/         # proposal_new.md, SUPPLEMENT_additions.pptx
+v3/              # Planned workshop paper
+  paper/
+shared/
+  code/          # pipeline (run_eval.py, backends.py, translate.py, analyze.py, …)
+  figures/       # main result figures (fig1, fig2)
+papers/          # reference PDFs (ProtoBias + related work)
+archive/         # HuggingFace HTML cache, SLURM logs
+PROJECT_NOTES.md # long-term project memory (data, decisions, progress log)
+```
 
 ## Quick start
 
 ```bash
-cd code
+cd shared/code
 pip install datasets pillow tqdm matplotlib deep-translator
-python translate.py        # build results/translations.json (human-reviewable)
-python run_eval.py --mock  # smoke-test the pipeline with no GPU/model
+python translate.py        # build translations.json (run on login node — needs network)
+python run_eval.py --mock  # smoke-test without GPU
 python analyze.py          # figures + summary.csv
 ```
 
-`--mock` uses a **simulated** biased model purely to verify the plumbing — those
-figures are **not real results**. For a real run on a GPU (Qwen2.5-VL), see
-[`code/README.md`](code/README.md).
+For GPU runs: see `shared/code/README.md` and `submit_eval.sh`.
 
 ## Data & model
 
-- **Data:** [`subha-roy/dl4dh_data`](https://huggingface.co/datasets/subha-roy/dl4dh_data) (ProtoBias) on the Hugging Face Hub.
-- **Model:** [`Qwen/Qwen2.5-VL-7B-Instruct`](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct).
+- **Data:** `subha-roy/dl4dh_data` (ProtoBias, 1500 rows, 3 domains × 500)
+- **Model:** `Qwen/Qwen2.5-VL-7B-Instruct`

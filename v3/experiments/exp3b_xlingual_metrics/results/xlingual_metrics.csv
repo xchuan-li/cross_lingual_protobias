@@ -1,0 +1,10 @@
+model,group_type,group,n_items,CFR,SBR,SCR
+qwen7b,overall,all,900,0.558,0.256,0.187
+qwen7b,domain,animal,300,0.55,0.273,0.177
+qwen7b,domain,demography,300,0.51,0.313,0.177
+qwen7b,domain,object,300,0.613,0.18,0.207
+qwen7b,socio_attr,civility,64,0.516,0.297,0.188
+qwen7b,socio_attr,intellect,48,0.562,0.208,0.229
+qwen7b,socio_attr,morality,93,0.538,0.247,0.215
+qwen7b,socio_attr,power,64,0.469,0.406,0.125
+qwen7b,socio_attr,wealth,31,0.419,0.516,0.065
