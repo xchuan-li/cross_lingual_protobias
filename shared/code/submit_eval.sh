@@ -35,8 +35,9 @@ source .venv/bin/activate
 
 # Reuse the cache the login node populated (model + dataset already there).
 # Go offline so a network-less compute node never hangs reaching the Hub.
-# Cache lives on $WORK (big FS); $HOME quota is too small for the model weights.
-export HF_HOME="${HF_HOME:-$WORK/hf_cache}"
+# Cache lives in the 'protobias' workspace (big quota; $HOME/$WORK are too small).
+# Honour an externally-set HF_HOME, else resolve the workspace path via ws_find.
+export HF_HOME="${HF_HOME:-$(ws_find protobias 2>/dev/null)/hf_cache}"
 export HF_HUB_OFFLINE=1
 export HF_DATASETS_OFFLINE=1
 export TOKENIZERS_PARALLELISM=false
