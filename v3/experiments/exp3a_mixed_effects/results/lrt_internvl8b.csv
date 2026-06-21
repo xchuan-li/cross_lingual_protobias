@@ -1,0 +1,4 @@
+model,test,chi2,df,p_value
+internvl8b,socio_attr (vs lang+gender),69.64175246489822,4,2.7016046948781647e-14
+internvl8b,lang (vs socio_attr+gender),17.217621690065243,6,0.008515863962213615
+internvl8b,socio_attr x lang interaction,17.87591072663008,24,0.8089861282264931

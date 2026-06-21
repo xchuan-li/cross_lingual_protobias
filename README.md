@@ -2,7 +2,7 @@
 
 Does a VLM pick the **typical-but-wrong** image over the **semantically-correct-but-atypical** one — and does that bias change across languages? We evaluate **Qwen2.5-VL** on **ProtoBias** with a 2AFC protocol.
 
-**Main finding (v2):** Bias is **attribute-specific** (wealth=.77, power=.67 vs morality=.49, intellect=.48) and **cross-linguistically invariant** (EN/ZH/AR/HI). It is a structural property of visual representation, not language-driven.
+**Main finding (v3 — Qwen2.5-VL-7B + InternVL3-8B, 7 languages):** Bias is **attribute-specific** (concentrated on wealth/social-status; near-chance for morality/intellect) and **replicates across both model families**. Adding lower-resource / distinct-script languages reveals a **language effect** v2's 4 languages missed: Bengali and Greek prompts elicit *more* bias than English (also replicated across families, and not a translation artifact). The attribute *pattern* is language-invariant; the *level* is not. See [v3/experiments/README.md](v3/experiments/README.md).
 
 ## Project versions
 
@@ -10,7 +10,7 @@ Does a VLM pick the **typical-but-wrong** image over the **semantically-correct-
 |---|---|---|
 | [v1](v1/README.md) | Course MVP: pipeline + pilot run (450 rows, EN/ZH/AR) | Done |
 | [v2](v2/README.md) | Full 4-language eval + attribute-specific discovery (3600 rows) | Done |
-| [v3](v3/README.md) | Workshop paper: mixed-effects model, extended languages, translation QA | Planned |
+| [v3](v3/README.md) | Multi-model (Qwen2.5-VL-7B + InternVL3-8B) × 7-language eval + mixed-effects + translation QA | Done |
 
 ## Repository layout
 

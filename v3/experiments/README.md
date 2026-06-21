@@ -1,8 +1,35 @@
-# v3 experiments — no-GPU analysis (PR II)
+# v3 experiments — multi-model, 7-language analysis (PR II)
 
-Three CPU-only analyses that turn the existing predictions into PR-II-grade
-results. They run **now** on the v2 exp1 data (3600 rows, en/zh/ar/hi, qwen7b)
-and re-run unchanged on the weekend multi-model / 7-language data.
+## Headline results (Qwen2.5-VL-7B + InternVL3-8B, 7 languages)
+
+Full run done: 2 model families × 7 languages (en/zh/ru/ar/hi/bn/el) × 900 items
+= 6237 (qwen7b) + 6300 (internvl8b) judgments. The two findings **replicate
+across both families** (see `exp3a_mixed_effects/figures/figE_cross_model_OR.png`):
+
+| | Qwen2.5-VL-7B | InternVL3-8B |
+|---|---|---|
+| overall error rate | 0.547 | 0.585 |
+| **attribute effect** (LRT) | p=2.1e-14 | p=2.7e-14 |
+| wealth odds ratio (vs morality) | 3.67 | 3.09 |
+| **language effect** (LRT) | p=0.024 | p=0.0085 |
+| Greek OR / Bengali OR (vs English) | 1.49 / 1.60 | 1.72 / 1.41 |
+| wealth stable-bias rate (SBR) | 0.58 | 0.45 |
+
+1. **Attribute-specific**: bias concentrates on wealth/social-status, near-chance
+   for morality/intellect — robust across both families.
+2. **Language-modulated**: lower-resource / distinct-script prompts (Bengali,
+   Greek) elicit *more* bias than English, replicated across both families, and
+   **not a translation artifact** — the elevated languages have the *highest*
+   back-translation fidelity (exp3d). No socio_attr×lang interaction (the
+   attribute pattern is the same in every language; the language effect is a
+   level shift). v2's "language-invariant" claim is refined: invariant in
+   *pattern*, not in *level*.
+32B was dropped (≈280 s/item on 2×A40 via naive pipeline-parallel → infeasible) →
+outlook / scale axis.
+
+These three CPU-only analyses (numpy/scipy, no statsmodels) produced the above and
+re-run unchanged via `--pred ../../../shared/code/results/predictions_*.jsonl`.
+They were first validated on v2 exp1 data (en/zh/ar/hi, qwen7b).
 
 **Deps:** numpy, scipy, pandas, matplotlib (all already present). Optional:
 `sacrebleu` (adds chrF to the translation audit). No statsmodels needed — the
