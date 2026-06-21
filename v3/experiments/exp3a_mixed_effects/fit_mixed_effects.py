@@ -172,7 +172,8 @@ def forest_plot(tab, model, out):
         ax.set_yticklabels(sub["label"])
         ax.set_xlabel("odds ratio (95% CI)")
         ax.set_title(title, fontsize=10)
-    fig.suptitle(f"Attribute moves the bias, language does not — {model}", fontsize=12)
+    fig.suptitle(f"Prototypicality-bias odds ratios: attribute (left) vs language (right) — {model}",
+                 fontsize=12)
     fig.tight_layout()
     fig.savefig(out, dpi=150)
     plt.close(fig)

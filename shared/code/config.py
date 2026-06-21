@@ -124,14 +124,16 @@ ACTIVE_LANGUAGES = ["en", "zh", "ru", "ar", "hi", "bn", "el"]
 #   qwen32b   same family, scaled up -> "does bias shrink with model size?"
 #   internvl8b different family, size-matched -> "is attribute-bias Qwen-specific?"
 #
-# The different-family pick is swappable; size-matched HF-native alternates that
-# also work with the generic backend (verify your transformers version on the
-# cluster): "llava-hf/llava-onevision-qwen2-7b-ov-hf", "google/gemma-3-12b-it",
-# "mistral-community/pixtral-12b".
+# The different-family pick must be an HF-NATIVE checkpoint: AutoModelForImage-
+# TextToText only recognizes the in-library configs. The original
+# "OpenGVLab/InternVL2_5-8B" ships a custom remote-code config (InternVLChatConfig)
+# that the generic backend can't load -> use the "-hf" conversion (InternVLConfig).
+# Other size-matched HF-native alternates that work with the generic backend:
+# "llava-hf/llava-onevision-qwen2-7b-ov-hf", "google/gemma-3-12b-it".
 MODELS = {
     "qwen7b":    {"hf": "Qwen/Qwen2.5-VL-7B-Instruct",  "backend": "qwen"},
     "qwen32b":   {"hf": "Qwen/Qwen2.5-VL-32B-Instruct", "backend": "qwen"},
-    "internvl8b": {"hf": "OpenGVLab/InternVL2_5-8B",    "backend": "hf"},
+    "internvl8b": {"hf": "OpenGVLab/InternVL3-8B-hf",   "backend": "hf"},
 }
 
 # Default model for a run; override on the CLI: `run_eval.py --model qwen32b`.
