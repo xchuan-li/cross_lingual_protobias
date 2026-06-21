@@ -30,12 +30,13 @@ cd "$SCRIPT_DIR"
 echo "Running in: $SCRIPT_DIR  | model: $MODEL"
 nvidia-smi || true
 
-module load python/3.12-base
+module load python/3.12-base 2>/dev/null || true   # tolerate module rename post-OS-upgrade
 source .venv/bin/activate
 
 # Reuse the cache the login node populated (model + dataset already there).
 # Go offline so a network-less compute node never hangs reaching the Hub.
-export HF_HOME="$HOME/hf_cache"
+# Cache lives on $WORK (big FS); $HOME quota is too small for the model weights.
+export HF_HOME="${HF_HOME:-$WORK/hf_cache}"
 export HF_HUB_OFFLINE=1
 export HF_DATASETS_OFFLINE=1
 export TOKENIZERS_PARALLELISM=false
