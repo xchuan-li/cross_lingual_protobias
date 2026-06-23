@@ -397,10 +397,88 @@ s.addTable([
 caption(s, "Item-clustered mixed-effects logistic regression; back-translation QA; numpy/scipy, no statsmodels.", { x: 2.2, y: 6.5, w: 8.9 });
 pageNo(s, 17);
 
-// ====================================== INTERACTIVE · MODEL EXPLORER (slides 20-22)
+// ============================================================ BACKUP A · WHY INTERNVL3
+s = pres.addSlide(); s.background = { color: PAPER };
+kicker(s, "Backup · methods", { color: DIM });
+title(s, "Why InternVL3-8B as the second model", { fontSize: 27 });
+s.addText("Goal: rule out “it's just a Qwen quirk.” A second, independent family tests whether the finding generalizes.",
+  { x: M, y: 1.8, w: W - 2 * M, h: 0.5, fontFace: BODY, fontSize: 15, italic: true, color: MUTE, margin: 0 });
+const why = [
+  ["Different family", "OpenGVLab, not Alibaba — independent architecture and training, not a Qwen variant."],
+  ["Size-matched", "≈8B vs Qwen's 7B — controls for scale, so a difference isn't “one is far bigger.”"],
+  ["Strong, standard baseline", "A top open VLM family widely used in papers — credible and representative."],
+  ["Fits the pipeline", "Multi-image and multilingual; the HF-native checkpoint loads via the standard API."],
+];
+why.forEach((r, i) => {
+  const y = 2.65 + i * 1.02; const c = [CORAL, BLUE, GREEN, INK][i];
+  s.addShape(pres.shapes.OVAL, { x: M, y: y + 0.03, w: 0.42, h: 0.42, fill: { color: c }, line: { type: "none" } });
+  s.addText(String(i + 1), { x: M, y: y + 0.03, w: 0.42, h: 0.42, fontFace: HEAD, fontSize: 15, bold: true, color: "FFFFFF", align: "center", valign: "middle", margin: 0 });
+  s.addText(r[0], { x: M + 0.65, y: y - 0.02, w: 3.7, h: 0.5, fontFace: HEAD, fontSize: 16, bold: true, color: TXT, valign: "top", margin: 0 });
+  s.addText(r[1], { x: M + 4.45, y: y - 0.02, w: 8.1, h: 0.85, fontFace: BODY, fontSize: 14, color: MUTE, valign: "top", margin: 0 });
+});
+pageNo(s);
+
+// ============================================================ BACKUP B · MIXED-EFFECTS + LRT
+s = pres.addSlide(); s.background = { color: PAPER };
+kicker(s, "Backup · methods", { color: DIM });
+title(s, "Mixed-effects logistic regression & the LRT", { fontSize: 26 });
+s.addText("The model", { x: M, y: 1.85, w: 5.8, h: 0.4, fontFace: HEAD, fontSize: 16, bold: true, color: CORAL, margin: 0 });
+s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: M, y: 2.3, w: 5.85, h: 0.7, fill: { color: INK }, line: { type: "none" }, rectRadius: 0.08 });
+s.addText("picked_adv ~ socio_attr + lang + gender + (1 | item)",
+  { x: M, y: 2.3, w: 5.85, h: 0.7, fontFace: "Courier New", fontSize: 12.5, color: "FFFFFF", align: "center", valign: "middle", margin: 4 });
+bullets(s, [
+  "Logistic → models P(pick prototype); coefficients exponentiate to odds ratios (OR).",
+  "Fixed effects (socio_attr, lang, gender) = what we estimate.",
+  "Random intercept (1 | item) = each image-pair gets its own baseline — the same item repeats in 7 languages, so those 7 views are not independent.",
+], { x: M, y: 3.25, w: 5.85, h: 3.0, fontSize: 13.5, gap: 9 });
+s.addText("The test  ·  LRT", { x: 7.2, y: 1.85, w: 5.4, h: 0.4, fontFace: HEAD, fontSize: 16, bold: true, color: BLUE, margin: 0 });
+bullets(s, [
+  "Fit two nested models (with vs without a factor); compare fit by likelihood.",
+  "χ² = 2×(LL_big − LL_small); p from chi-squared → one p-value per whole factor.",
+], { x: 7.2, y: 2.3, w: 5.4, h: 1.7, fontSize: 13.5, gap: 9 });
+const bh2 = (t) => ({ text: t, options: { fill: { color: INK }, color: "FFFFFF", bold: true, fontSize: 11.5 } });
+const bc2 = (t, c, b) => ({ text: t, options: { color: c || TXT, bold: !!b, fontSize: 12, valign: "middle" } });
+s.addTable([
+  [bh2("factor"), bh2("χ²"), bh2("p"), bh2("verdict")],
+  [bc2("socio_attr", TXT, true), bc2("70.1"), bc2("2×10⁻¹⁴", CORAL, true), bc2("significant", CORAL)],
+  [bc2("language", TXT, true), bc2("14.6"), bc2("0.024", CORAL, true), bc2("significant", CORAL)],
+  [bc2("attr × lang", TXT, true), bc2("18.8"), bc2("0.76"), bc2("n.s.", MUTE)],
+], { x: 7.2, y: 4.15, w: 5.4, colW: [1.7, 1.0, 1.4, 1.3], rowH: 0.46, border: { pt: 0.5, color: CLINE }, fontFace: BODY, valign: "middle", margin: [2, 5, 2, 5] });
+caption(s, "Qwen-7B; same pattern in InternVL3-8B. Implemented with item-clustered robust SEs (no statsmodels on the cluster).", { x: 7.2, y: 6.35, w: 5.4 });
+pageNo(s);
+
+// ============================================================ BACKUP C · BACK-TRANSLATION QA
+s = pres.addSlide(); s.background = { color: PAPER };
+kicker(s, "Backup · methods", { color: DIM });
+title(s, "Back-translation translation-quality check", { fontSize: 26 });
+s.addText("We can't read all 7 languages — so we round-trip each prompt back to English and measure how much it drifted.",
+  { x: M, y: 1.8, w: W - 2 * M, h: 0.4, fontFace: BODY, fontSize: 15, italic: true, color: MUTE, margin: 0 });
+const fb = (x, t1, t2) => {
+  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y: 2.5, w: 2.7, h: 0.95, fill: { color: CARD }, line: { color: CLINE, width: 1 }, rectRadius: 0.08 });
+  s.addText([{ text: t1, options: { bold: true, breakLine: true, fontSize: 13 } }, { text: t2, options: { fontSize: 10.5, color: MUTE } }],
+    { x, y: 2.5, w: 2.7, h: 0.95, fontFace: BODY, color: TXT, align: "center", valign: "middle", margin: 2 });
+};
+const arr = (x, lab) => {
+  s.addShape(pres.shapes.LINE, { x, y: 2.97, w: 0.55, h: 0, line: { color: CORAL, width: 2, endArrowType: "triangle" } });
+  s.addText(lab, { x: x - 0.25, y: 2.55, w: 1.05, h: 0.3, fontFace: BODY, fontSize: 10, italic: true, color: CORAL, align: "center", margin: 0 });
+};
+fb(M, "English prompt", "original E");
+arr(3.55, "translate");
+fb(4.25, "Greek text", "shown to the model");
+arr(7.05, "back-translate");
+fb(7.75, "English again", "E′");
+s.addText("compare  E vs E′  →  token-F1", { x: 10.65, y: 2.5, w: 2.3, h: 0.95, fontFace: HEAD, fontSize: 13, bold: true, color: INK, align: "center", valign: "middle", margin: 0 });
+bullets(s, [
+  "If the language effect were a translation artifact, the most-biased languages would drift the MOST.",
+  "Instead the opposite: Greek (0.88) and Bengali (0.86) — the most biased — have the HIGHEST fidelity; Hindi / Russian (0.79) — not biased — the lowest.",
+  "Caveat: a lexical check using the same MT system — a sanity check that rules out the obvious confound, not a proof.",
+], { x: M, y: 4.0, w: W - 2 * M, h: 2.6, fontSize: 14.5, gap: 11 });
+pageNo(s);
+
+// ====================================== INTERACTIVE · MODEL EXPLORER (slides 23-25)
 // Click a button -> hyperlink jumps to the twin slide showing a different model.
 // Works in PowerPoint slideshow mode (Mac/Windows/online); no animations needed.
-const EXPQ = 20, EXPI = 21, EXPB = 22;
+const EXPQ = 23, EXPI = 24, EXPB = 25;  // explorer slides shift to 23-25 after the 3 method-backup slides
 function explorer(figpath, ratio, activeIdx) {
   const sl = pres.addSlide(); sl.background = { color: PAPER };
   kicker(sl, "Interactive · model explorer");
