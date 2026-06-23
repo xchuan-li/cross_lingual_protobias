@@ -475,10 +475,34 @@ bullets(s, [
 ], { x: M, y: 4.0, w: W - 2 * M, h: 2.6, fontSize: 14.5, gap: 11 });
 pageNo(s);
 
-// ====================================== INTERACTIVE · MODEL EXPLORER (slides 23-25)
+// ============================================================ BACKUP D · METRICS DEFINED
+s = pres.addSlide(); s.background = { color: PAPER };
+kicker(s, "Backup · methods", { color: DIM });
+title(s, "The cross-lingual metrics, defined", { fontSize: 26 });
+s.addText("For each image-pair we summarise its behaviour across all its languages (items judged in ≥ 2 languages).",
+  { x: M, y: 1.8, w: W - 2 * M, h: 0.4, fontFace: BODY, fontSize: 15, italic: true, color: MUTE, margin: 0 });
+s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: M, y: 2.35, w: W - 2 * M, h: 0.9, fill: { color: INK }, line: { type: "none" }, rectRadius: 0.08 });
+s.addText("per item, across languages:   all-wrong → SBR   ·   all-right → SCR   ·   mixed → CFR\nCFR + SBR + SCR = 1",
+  { x: M, y: 2.35, w: W - 2 * M, h: 0.9, fontFace: "Courier New", fontSize: 12.5, color: "FFFFFF", align: "center", valign: "middle", margin: 4 });
+const mdefs = [
+  ["Cross-lingual Flip Rate (CFR)", "the model's choice changes across languages — the item is not stable.", CORAL],
+  ["Stable Bias Rate (SBR)", "the model picks the prototypical-but-wrong image in every language.", BLUE],
+  ["Stable Correct Rate (SCR)", "the model picks the correct image in every language.", GREEN],
+];
+mdefs.forEach((d, i) => {
+  const y = 3.55 + i * 0.82;
+  s.addShape(pres.shapes.OVAL, { x: M, y: y + 0.08, w: 0.16, h: 0.16, fill: { color: d[2] }, line: { type: "none" } });
+  s.addText([{ text: d[0] + "  ", options: { bold: true, color: d[2] } }, { text: "— " + d[1], options: { color: TXT } }],
+    { x: M + 0.35, y, w: W - 2 * M - 0.35, h: 0.6, fontFace: BODY, fontSize: 15.5, valign: "top", margin: 0 });
+});
+s.addText("These are item-level summaries across languages, not per-judgment — which is why a flat aggregate error rate can still hide heavy item-level flipping (overall CFR ≈ 0.65).",
+  { x: M, y: 6.2, w: W - 2 * M, h: 0.7, fontFace: BODY, fontSize: 13, italic: true, color: MUTE, margin: 0 });
+pageNo(s);
+
+// ====================================== INTERACTIVE · MODEL EXPLORER (slides 24-26)
 // Click a button -> hyperlink jumps to the twin slide showing a different model.
 // Works in PowerPoint slideshow mode (Mac/Windows/online); no animations needed.
-const EXPQ = 23, EXPI = 24, EXPB = 25;  // explorer slides shift to 23-25 after the 3 method-backup slides
+const EXPQ = 24, EXPI = 25, EXPB = 26;  // explorer slides (after 4 method-backup slides)
 function explorer(figpath, ratio, activeIdx) {
   const sl = pres.addSlide(); sl.background = { color: PAPER };
   kicker(sl, "Interactive · model explorer");
