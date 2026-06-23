@@ -207,13 +207,13 @@ s = pres.addSlide(); s.background = { color: PAPER };
 kicker(s, "Result 1");
 title(s, "The bias follows the attribute");
 bullets(s, [
-  "Demography's flat ~0.56 average hides a 0.30 spread.",
+  "Demography's flat ~0.58 average hides a ~0.28 spread across attributes.",
   "Strong bias for social-status attributes — Wealth, Power.",
   "Near-chance for Morality and Intellect.",
   "Web data encodes what “rich / powerful” looks like; there is no stable visual prototype for “moral” or “smart.”",
 ], { y: 2.15, w: 5.7, fontSize: 17 });
-fig(s, "v2/experiments/exp2_attribute_bias/figures/figA_bias_by_attribute.png", { x: 6.95, y: 2.3, w: 5.6, ratio: 1.625 });
-caption(s, "Prototypicality error rate by socio-attribute (Qwen2.5-VL-7B).", { x: 6.95, y: 5.95, w: 5.6 });
+fig(s, "v3/experiments/exp3a_mixed_effects/figures/figA7_attribute_qwen7lang.png", { x: 6.95, y: 2.3, w: 5.6, ratio: 1.625 });
+caption(s, "Prototypicality error rate by socio-attribute — Qwen2.5-VL-7B, all 7 languages.", { x: 6.95, y: 5.95, w: 5.6 });
 pageNo(s, 8);
 
 // ============================================================ S9 · MONEY SLIDE
