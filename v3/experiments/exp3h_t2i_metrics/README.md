@@ -1,0 +1,66 @@
+# exp3h — T2I alignment metrics (PR-II advisor ask)
+
+Advisor feedback on PR II: *"add some T2I evaluation metrics in the results,
+such as VQAScore, CLIPScore, PickScore."*
+
+Our headline measure is **behavioural** — a VLM is asked to pick one of two
+images. T2I alignment metrics add an orthogonal, **representational** measure of
+the *same* items: score the neutral English description against each image and
+compare.
+
+```
+margin = score(correct_image, text) - score(adversarial_image, text)
+margin > 0  ->  metric prefers the semantically-correct (atypical) image
+margin < 0  ->  metric prefers the typical-but-wrong image
+               = the metric ITSELF is prototypicality-biased (no VLM involved)
+metric_bias_rate = share of items with margin < 0   (0.5 = no bias)
+```
+
+## Two questions this answers
+
+1. **Is the bias in the representation, or only in the VLM's decoding?**
+   If CLIP/PickScore already score the typical image higher — especially on the
+   same attributes/subcategories where the VLM is biased (wealth/power; bird,
+   vehicle) — the bias is baked into the image-text embedding space, not an
+   artifact of one VLM's answer generation.
+
+2. **Does the VLM's choice track the metric?** (`analyze_t2i.py`, join on `item`)
+   Split the VLM's English correct-pick rate by which image the metric scored
+   higher. A positive "tracking gap" means behaviour and representation are the
+   same phenomenon at two levels.
+
+## Metrics
+| key | what | model | cost |
+|---|---|---|---|
+| `clip` | CLIPScore = cosine(image, text) | `openai/clip-vit-large-patch14` | light |
+| `pick` | PickScore (human-preference CLIP) | `yuvalkirstain/PickScore_v1` | light |
+| `vqa` | VQAScore, P(image entails text) | `t2v_metrics` (clip-flant5) | heavy, optional |
+
+`vqa` needs `pip install t2v_metrics`; it is skipped automatically if the package
+is absent, so `clip`+`pick` always run.
+
+## Run
+```bash
+# plumbing test — no downloads, no GPU (uses item metadata from predictions)
+python compute_t2i_metrics.py --mock && python analyze_t2i.py
+
+# real: on the GPU cluster (see submit_t2i.sh). English text only; no
+# translation cache needed. Resumable on (item, metric).
+python compute_t2i_metrics.py --metrics clip pick   # -> results/t2i_scores.csv
+python analyze_t2i.py                                # -> figI, figJ, results/*.csv
+```
+
+## Scope / caveats
+- **English text only** by design: this isolates the *representation* question.
+  The cross-lingual axis stays with the VLM behaviour (exp3a/b). A multilingual
+  extension would swap in a multilingual CLIP (e.g.
+  `sentence-transformers/clip-ViT-B-32-multilingual-v1`) — noted as follow-up.
+- Demography attribute cells are small (wealth n≈31 per the seed-42 sample), so
+  read figI with its Wilson CIs; the domain/subcategory pools are larger.
+- CLIPScore text is truncated to CLIP's 77-token limit (fine — `text` is short).
+
+## Outputs
+- `results/t2i_scores.csv` — per item × metric: score_correct, score_adv, margin
+- `results/metric_bias_by_attr.csv`, `metric_bias_by_subcategory.csv`
+- `results/vlm_metric_tracking.csv` — VLM–metric agreement + tracking gap
+- `figures/figI_metric_bias_by_attr.png`, `figures/figJ_vlm_tracks_metric.png`

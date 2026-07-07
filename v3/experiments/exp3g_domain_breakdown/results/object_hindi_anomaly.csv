@@ -1,0 +1,7 @@
+model,subcategory,hi,hi_n,other,other_n,gap
+internvl8b,vehicle,0.642,109,0.642,654,0.0
+internvl8b,tableware,0.61,100,0.498,600,0.112
+internvl8b,furniture,0.56,91,0.463,546,0.097
+qwen7b,vehicle,0.633,109,0.613,651,0.02
+qwen7b,tableware,0.6,100,0.525,600,0.075
+qwen7b,furniture,0.33,91,0.346,546,-0.016
