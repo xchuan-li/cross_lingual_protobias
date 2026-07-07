@@ -1,0 +1,11 @@
+socio_attr,metric_bias_rate,n,ci_lo,ci_hi,mean_margin,metric
+wealth,0.903,31.0,0.751,0.967,-0.0495,clip
+power,0.766,64.0,0.649,0.853,-0.0236,clip
+civility,0.672,64.0,0.55,0.774,-0.0184,clip
+morality,0.645,93.0,0.544,0.735,-0.0159,clip
+intellect,0.646,48.0,0.504,0.766,-0.0077,clip
+wealth,0.903,31.0,0.751,0.967,-1.4392,pick
+power,0.766,64.0,0.649,0.853,-0.6963,pick
+civility,0.609,64.0,0.487,0.719,-0.462,pick
+morality,0.57,93.0,0.468,0.666,-0.2866,pick
+intellect,0.542,48.0,0.403,0.674,-0.1252,pick

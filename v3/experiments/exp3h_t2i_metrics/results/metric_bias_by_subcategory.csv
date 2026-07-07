@@ -1,0 +1,13 @@
+subcategory,metric_bias_rate,n,ci_lo,ci_hi,mean_margin,metric,domain
+animal,0.703,91.0,0.603,0.787,-0.006,clip,animal
+bird,0.955,112.0,0.9,0.981,-0.042,clip,animal
+mammal,0.515,97.0,0.417,0.612,-0.0072,clip,animal
+furniture,0.626,91.0,0.524,0.719,-0.0116,clip,object
+tableware,0.7,100.0,0.604,0.781,-0.0205,clip,object
+vehicle,0.734,109.0,0.644,0.808,-0.0208,clip,object
+animal,0.714,91.0,0.614,0.797,-0.4196,pick,animal
+bird,0.911,112.0,0.843,0.951,-1.4226,pick,animal
+mammal,0.392,97.0,0.301,0.491,0.4026,pick,animal
+furniture,0.549,91.0,0.447,0.648,-0.1869,pick,object
+tableware,0.68,100.0,0.583,0.763,-0.6389,pick,object
+vehicle,0.807,109.0,0.723,0.87,-0.7021,pick,object

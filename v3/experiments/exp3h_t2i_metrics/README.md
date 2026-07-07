@@ -50,6 +50,33 @@ python compute_t2i_metrics.py --metrics clip pick   # -> results/t2i_scores.csv
 python analyze_t2i.py                                # -> figI, figJ, results/*.csv
 ```
 
+## Results (CLIPScore + PickScore, 900 items)
+
+**1. The bias is in the representation, not just the VLM's decoding.**
+Overall metric bias rate — share of items where the metric scores the
+typical-but-wrong image higher — is **CLIP 0.71, PickScore 0.67**, far above the
+0.5 no-bias line, and similar across all three domains.
+
+**2. The embedding space carries the VLM's exact attribute signature** (fig `figI`).
+Demography metric bias rate falls monotonically wealth → intellect, mirroring
+the behavioural wealth/power >> morality/intellect pattern from exp2/exp3a:
+
+| socio_attr | CLIP bias rate | PickScore bias rate |
+|---|---|---|
+| wealth | 0.90 | 0.90 |
+| power | 0.77 | 0.77 |
+| civility | 0.67 | 0.61 |
+| morality | 0.65 | 0.57 |
+| intellect | 0.65 | 0.54 |
+
+**3. The VLM's choice tracks the metric** (fig `figJ`, tracking gap +0.26 to +0.34,
+consistent across both models × both metrics). When the metric prefers the
+correct image the VLM picks it ~0.64–0.70 of the time; when the metric prefers
+the typical image the VLM picks correct only ~0.34–0.41. VLM–metric agreement
+0.62–0.66. The behavioural bias and the embedding-space bias are the same
+phenomenon at two levels — so prototypicality bias is a property of the shared
+image-text representation, not an artifact of one model's answer generation.
+
 ## Scope / caveats
 - **English text only** by design: this isolates the *representation* question.
   The cross-lingual axis stays with the VLM behaviour (exp3a/b). A multilingual

@@ -100,16 +100,18 @@ class PickScorer:
         self.model = AutoModel.from_pretrained(model_name).to(self.device).eval()
 
     def score(self, image, text):
+        # One combined forward and read the projected embeds off the output
+        # (mirrors the CLIP path). Some transformers versions make
+        # get_image_features return an output object rather than a tensor, so
+        # we avoid it and use model(**inp).image_embeds / .text_embeds.
         t = self.torch
-        img_in = self.proc(images=[image], return_tensors="pt").to(self.device)
-        txt_in = self.proc(text=[text], return_tensors="pt", padding=True,
-                           truncation=True, max_length=77).to(self.device)
+        inp = self.proc(text=[text], images=[image], return_tensors="pt",
+                        padding=True, truncation=True, max_length=77).to(self.device)
         with t.no_grad():
-            ie = self.model.get_image_features(**img_in)
-            te = self.model.get_text_features(**txt_in)
-            ie = ie / ie.norm(dim=-1, keepdim=True)
-            te = te / te.norm(dim=-1, keepdim=True)
-            s = (self.model.logit_scale.exp() * (te * ie).sum(-1))
+            out = self.model(**inp)
+            ie = out.image_embeds / out.image_embeds.norm(dim=-1, keepdim=True)
+            te = out.text_embeds / out.text_embeds.norm(dim=-1, keepdim=True)
+            s = self.model.logit_scale.exp() * (te * ie).sum(-1)
         return float(s.item())
 
 

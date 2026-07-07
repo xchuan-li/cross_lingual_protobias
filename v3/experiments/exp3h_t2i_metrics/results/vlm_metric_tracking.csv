@@ -1,0 +1,5 @@
+metric,model,n,agreement,vlm_correct_when_metric_correct,vlm_correct_when_metric_typical,tracking_gap
+clip,internvl8b,900,0.628,0.64,0.377,0.263
+clip,qwen7b,891,0.616,0.69,0.414,0.275
+pick,internvl8b,900,0.664,0.68,0.343,0.337
+pick,qwen7b,891,0.64,0.704,0.392,0.312

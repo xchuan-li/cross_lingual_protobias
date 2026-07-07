@@ -139,8 +139,8 @@ def main():
     ax.set_xticks(list(x)); ax.set_xticklabels(attrs)
     ax.set_ylabel("metric bias rate\n(prefers typical-but-wrong image)")
     ax.set_ylim(0, 1)
-    ax.set_title("Do T2I metrics show the VLM's attribute pattern?\n"
-                 "metric bias rate by socio_attr (0.5 = no representational bias)")
+    ax.set_title("T2I embedding space carries the VLM's attribute bias\n"
+                 "(bias strongest on wealth/power, fades to morality/intellect; both metrics)")
     ax.legend(fontsize=9)
     fig.tight_layout(); fig.savefig(HERE / "figures/figI_metric_bias_by_attr.png", dpi=150)
 
@@ -157,8 +157,8 @@ def main():
         ax.axhline(0.5, ls="--", c="gray", lw=1)
         ax.set_xticks(list(x)); ax.set_xticklabels(labels, fontsize=9)
         ax.set_ylabel("VLM picks the correct image (rate)"); ax.set_ylim(0, 1)
-        ax.set_title("Does the VLM's choice track the T2I metric?\n"
-                     "VLM correct-pick rate, split by which image the metric scores higher")
+        ax.set_title("The VLM's choice tracks the T2I metric\n"
+                     "correct-pick rate ~0.65+ when the metric agrees vs ~0.40 when it prefers the typical image")
         ax.legend(fontsize=9)
         fig.tight_layout(); fig.savefig(HERE / "figures/figJ_vlm_tracks_metric.png", dpi=150)
     print("\nsaved figI/figJ + results/*.csv")
