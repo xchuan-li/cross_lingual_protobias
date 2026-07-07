@@ -158,7 +158,7 @@ def main():
         ax.set_xticks(list(x)); ax.set_xticklabels(labels, fontsize=9)
         ax.set_ylabel("VLM picks the correct image (rate)"); ax.set_ylim(0, 1)
         ax.set_title("The VLM's choice tracks the T2I metric\n"
-                     "correct-pick rate ~0.65+ when the metric agrees vs ~0.40 when it prefers the typical image")
+                     "(correct-pick rate: ~0.65+ agree vs ~0.40 disagree)")
         ax.legend(fontsize=9)
         fig.tight_layout(); fig.savefig(HERE / "figures/figJ_vlm_tracks_metric.png", dpi=150)
     print("\nsaved figI/figJ + results/*.csv")
