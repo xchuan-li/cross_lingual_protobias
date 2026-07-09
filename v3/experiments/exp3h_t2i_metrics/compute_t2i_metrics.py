@@ -179,21 +179,21 @@ class VQABlip2Scorer:
             model_name, torch_dtype=self.dtype).to(self.device).eval()
 
     def score(self, image, text):
-        # P("yes") from the first generated token's distribution. We DON'T
-        # hard-code a "yes" id (the id the model emits for "yes" differs from
-        # tokenizer("yes")); instead decode the top-k tokens and sum the prob of
-        # whichever ones read as "yes". Robust to the exact SentencePiece id.
+        # P("yes") = likelihood of the forced answer "yes" vs "no", normalised.
+        # Scoring each candidate answer with the model's own loss avoids reading
+        # generate()'s score tensor (near-uniform here) and any token-id guessing.
+        import math
         t = self.torch
         prompt = f'Question: Does this image show "{text}"? Answer:'
         inp = self.proc(images=image, text=prompt, return_tensors="pt").to(self.device, self.dtype)
-        with t.no_grad():
-            out = self.model.generate(**inp, max_new_tokens=1,
-                                      output_scores=True, return_dict_in_generate=True)
-            probs = out.scores[0][0].float().softmax(-1)
-        topk = probs.topk(20)
-        p_yes = sum(p for p, tid in zip(topk.values.tolist(), topk.indices.tolist())
-                    if self.proc.tokenizer.decode([int(tid)]).strip().lower().startswith("yes"))
-        return float(p_yes)
+        lp = {}
+        for ans in ("yes", "no"):
+            labels = self.proc.tokenizer(ans, return_tensors="pt").input_ids.to(self.device)
+            with t.no_grad():
+                loss = self.model(**inp, labels=labels).loss  # mean NLL over answer tokens
+            lp[ans] = -float(loss) * labels.shape[1]           # total log-prob
+        py, pn = math.exp(lp["yes"]), math.exp(lp["no"])
+        return py / (py + pn)
 
 
 class VQAScorer:
