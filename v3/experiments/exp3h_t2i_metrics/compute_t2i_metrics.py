@@ -182,21 +182,16 @@ class VQABlip2Scorer:
             model_name, torch_dtype=self.dtype).to(self.device).eval()
 
     def score(self, image, text):
-        # P("yes") = likelihood of the forced answer "yes" vs "no", normalised.
-        # Scoring each candidate answer with the model's own loss avoids reading
-        # generate()'s score tensor (near-uniform here) and any token-id guessing.
-        import math
-        t = self.torch
+        # Binary VQAScore: ask the model to answer yes/no and read its decoded
+        # answer. Only generate() conditions on the image for BLIP-2 here (a plain
+        # labels-forward ignored the image and returned 0.5 for everything), so we
+        # use the answer generate() commits to: yes -> 1.0, no -> 0.0.
         prompt = f'Question: Does this image show "{text}"? Answer:'
         inp = self.proc(images=image, text=prompt, return_tensors="pt").to(self.device, self.dtype)
-        lp = {}
-        for ans in ("yes", "no"):
-            labels = self.proc.tokenizer(ans, return_tensors="pt").input_ids.to(self.device)
-            with t.no_grad():
-                loss = self.model(**inp, labels=labels).loss  # mean NLL over answer tokens
-            lp[ans] = -float(loss) * labels.shape[1]           # total log-prob
-        py, pn = math.exp(lp["yes"]), math.exp(lp["no"])
-        return py / (py + pn)
+        with self.torch.no_grad():
+            gen = self.model.generate(**inp, max_new_tokens=3)
+        ans = self.proc.batch_decode(gen, skip_special_tokens=True)[0].strip().lower()
+        return 1.0 if ans.startswith("yes") else (0.0 if ans.startswith("no") else 0.5)
 
 
 class VQAScorer:
