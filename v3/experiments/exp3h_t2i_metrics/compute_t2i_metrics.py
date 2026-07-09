@@ -159,12 +159,52 @@ class MCLIPScorer:
         return float(cos.item())
 
 
+class VQABlip2Scorer:
+    """VQAScore via a transformers-native BLIP-2 FlanT5 VQA model.
+
+    Same method as t2v_metrics' VQAScore — P("yes" | image, "does this image
+    show <text>?") from a FlanT5-based VQA model — but self-contained in
+    transformers, so it avoids the t2v_metrics / llava / torch-reinstall
+    dependency stack that fights the base GPU environment (Kaggle, Colab).
+    Default Salesforce/blip2-flan-t5-xl (~4GB, fits a 16GB T4).
+    """
+    def __init__(self, model_name="Salesforce/blip2-flan-t5-xl"):
+        import torch
+        from transformers import Blip2Processor, Blip2ForConditionalGeneration
+        self.torch = torch
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.dtype = torch.float16 if self.device == "cuda" else torch.float32
+        self.proc = Blip2Processor.from_pretrained(model_name)
+        self.model = Blip2ForConditionalGeneration.from_pretrained(
+            model_name, torch_dtype=self.dtype).to(self.device).eval()
+        self.dec_start = self.model.config.text_config.decoder_start_token_id or 0
+        # token ids that spell "yes" (handle SentencePiece ▁ prefix + casing)
+        ids = set()
+        for w in ["yes", "Yes", " yes", " Yes"]:
+            toks = self.proc.tokenizer(w, add_special_tokens=False).input_ids
+            if toks:
+                ids.add(toks[0])
+        self.yes_ids = sorted(ids)
+
+    def score(self, image, text):
+        t = self.torch
+        prompt = f'Question: Does this image show "{text}"? Answer:'
+        inp = self.proc(images=image, text=prompt, return_tensors="pt").to(self.device, self.dtype)
+        dec = t.tensor([[self.dec_start]], device=self.device)
+        with t.no_grad():
+            logits = self.model(**inp, decoder_input_ids=dec).logits  # [1,1,vocab]
+            probs = logits[0, -1].float().softmax(-1)
+            p_yes = probs[self.yes_ids].sum().item()
+        return p_yes
+
+
 class VQAScorer:
     """VQAScore (Lin et al. 2024) via the optional `t2v_metrics` package.
 
-    P(image entails text) from a VQA model. Heavy; the mentor asks for the
-    package default clip-flant5-xxl (~11B, needs ~22GB → an A40 / 2×T4 / 8-bit).
-    clip-flant5-xl (~3B) fits a single 16GB T4 and is the safe fallback.
+    P(image entails text) from a VQA model. Heavy; the mentor's default is
+    clip-flant5-xxl (~11B, ~22GB). Its dependency stack (llava + a pinned torch)
+    often fights the base GPU env — VQABlip2Scorer is the self-contained
+    fallback (same method, transformers-native). Route via --vqa-model.
     """
     def __init__(self, model="clip-flant5-xxl"):
         import t2v_metrics  # optional dependency
@@ -185,8 +225,12 @@ SCORERS = {"clip": CLIPScorer, "pick": PickScorer, "mclip": MCLIPScorer, "vqa": 
 def build_scorer(name, mock, seed, vqa_model=None):
     if mock:
         return MockScorer(seed=seed + hash(name) % 1000)
-    if name == "vqa" and vqa_model:
-        return VQAScorer(model=vqa_model)
+    if name == "vqa":
+        vm = vqa_model or "clip-flant5-xxl"
+        if "blip2" in vm:  # self-contained transformers backend (no t2v_metrics)
+            hf = vm if "/" in vm else f"Salesforce/{vm}"
+            return VQABlip2Scorer(model_name=hf)
+        return VQAScorer(model=vm)  # t2v_metrics (clip-flant5-*)
     return SCORERS[name]()
 
 
@@ -348,8 +392,9 @@ def main():
     ap.add_argument("--translations", default=None,
                     help="path to translations.json (auto-located if omitted)")
     ap.add_argument("--vqa-model", default="clip-flant5-xxl",
-                    help="t2v_metrics model for --metrics vqa "
-                         "(clip-flant5-xxl needs ~22GB; clip-flant5-xl fits a 16GB T4)")
+                    help="model for --metrics vqa. clip-flant5-xxl/-xl -> t2v_metrics "
+                         "(heavy deps). blip2-flan-t5-xl -> self-contained transformers "
+                         "VQAScore, no t2v_metrics (recommended when the deps fight the GPU env).")
     ap.add_argument("--limit", type=int, default=None,
                     help="only the first N items (smoke-test model loading)")
     ap.add_argument("--seed", type=int, default=42)
