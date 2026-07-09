@@ -173,7 +173,10 @@ class VQABlip2Scorer:
         from transformers import Blip2Processor, Blip2ForConditionalGeneration
         self.torch = torch
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        self.dtype = torch.float16 if self.device == "cuda" else torch.float32
+        # bfloat16, NOT float16: the FlanT5 language model overflows in fp16
+        # (trained in bf16) → garbage, ~uniform logits. bf16 has fp32's exponent
+        # range at fp16's memory, and runs on a T4.
+        self.dtype = torch.bfloat16 if self.device == "cuda" else torch.float32
         self.proc = Blip2Processor.from_pretrained(model_name)
         self.model = Blip2ForConditionalGeneration.from_pretrained(
             model_name, torch_dtype=self.dtype).to(self.device).eval()
