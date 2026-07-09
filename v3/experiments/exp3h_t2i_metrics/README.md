@@ -34,21 +34,47 @@ metric_bias_rate = share of items with margin < 0   (0.5 = no bias)
 |---|---|---|---|
 | `clip` | CLIPScore = cosine(image, text) | `openai/clip-vit-large-patch14` | light |
 | `pick` | PickScore (human-preference CLIP) | `yuvalkirstain/PickScore_v1` | light |
-| `vqa` | VQAScore, P(image entails text) | `t2v_metrics` (clip-flant5) | heavy, optional |
+| `mclip` | multilingual CLIPScore (for translated prompts) | `google/siglip-base-patch16-256-multilingual` | light |
+| `vqa` | VQAScore, P(image entails text) | `t2v_metrics` (`clip-flant5-xxl`) | heavy, separate env |
 
-`vqa` needs `pip install t2v_metrics`; it is skipped automatically if the package
-is absent, so `clip`+`pick` always run.
+`clip`/`pick` have English-only text towers, so the cross-lingual run
+(`--text translated`) uses `mclip` (SigLIP-multilingual) on the actual
+translated prompts. `vqa` needs a dedicated environment (`pip install
+t2v_metrics`, default model `clip-flant5-xxl`); it is skipped automatically if
+the package is absent, so the others always run.
 
 ## Run
 ```bash
-# plumbing test — no downloads, no GPU (uses item metadata from predictions)
+# plumbing test — no downloads, no GPU (uses item metadata + translations.json)
 python compute_t2i_metrics.py --mock && python analyze_t2i.py
+python compute_t2i_metrics.py --mock --text translated && python analyze_xlingual.py
 
-# real: on the GPU cluster (see submit_t2i.sh). English text only; no
-# translation cache needed. Resumable on (item, metric).
-python compute_t2i_metrics.py --metrics clip pick   # -> results/t2i_scores.csv
-python analyze_t2i.py                                # -> figI, figJ, results/*.csv
+# (1) English representation run — CLIPScore + PickScore.  Resumable on (item, metric).
+python compute_t2i_metrics.py --metrics clip pick    # -> results/t2i_scores.csv
+python analyze_t2i.py                                 # -> figI, figJ
+
+# (2) Cross-lingual run (mentor ask) — score the TRANSLATED prompt per language
+#     with a multilingual backbone.  Resumable on (item, lang, metric).
+python compute_t2i_metrics.py --text translated       # -> results/t2i_scores_xlingual.csv
+python analyze_xlingual.py                            # -> figK_xlingual_bias_mclip.png
+
+# (3) VQAScore — in a SEPARATE environment (see below).
+python compute_t2i_metrics.py --metrics vqa           # appends to results/t2i_scores.csv
 ```
+
+### VQAScore — dedicated environment (mentor's instruction)
+`t2v_metrics` pins its own deps and conflicts with the eval venv, so build a
+fresh one and use the package default `clip-flant5-xxl` (~11B, fits one A40):
+```bash
+python -m venv .venv_vqa && source .venv_vqa/bin/activate
+pip install t2v_metrics                     # pulls its own torch/transformers
+export HF_HOME="$(ws_find protobias)/hf_cache"
+python compute_t2i_metrics.py --metrics vqa --limit 2   # prime clip-flant5-xxl, smoke test
+python compute_t2i_metrics.py --metrics vqa             # full run (resumable)
+```
+If pip resolution fights, resolve per the error (ChatGPT/Claude help) — usually a
+torch/transformers version pin. VQAScore rows land in the same `t2i_scores.csv`
+and `analyze_t2i.py` picks them up as a third metric automatically.
 
 ## Results (CLIPScore + PickScore, 900 items)
 

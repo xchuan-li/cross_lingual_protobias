@@ -14,23 +14,32 @@ margin > 0  => the metric prefers the semantically-correct (atypical) image.
 margin < 0  => the metric prefers the typical-but-wrong image = the metric ITSELF
                shows prototypicality bias, independent of any VLM's decoding.
 
-Scoring the *English* text isolates the representation question ("is the bias
-baked into the image-text embedding space?"); the cross-lingual axis stays with
-the VLM behaviour and the multilingual-CLIP extension is a follow-up (see README).
+Two modes (--text):
+  english     score the English `text` — isolates the representation question
+              ("is the bias baked into the embedding space?"). One row per
+              (item, metric) in results/t2i_scores.csv.
+  translated  score each language's TRANSLATED prompt with a multilingual
+              backbone — the mentor's ask, the representational analogue of the
+              VLM's per-language result. One row per (item, lang, metric) in
+              results/t2i_scores_xlingual.csv.
 
 The item set is exactly the evaluated one: same `data_utils.sample_rows()`
 (seed 42, N_PER_DOMAIN), so scores join 1:1 to predictions on `item`.
 
 Metrics:
-  clip  — CLIPScore: cosine(image, text) via openai/clip-vit-large-patch14.
-  pick  — PickScore: human-preference-tuned CLIP (yuvalkirstain/PickScore_v1).
-  vqa   — VQAScore: needs the `t2v_metrics` package (optional; skipped if absent).
+  clip   — CLIPScore: cosine(image, text) via openai/clip-vit-large-patch14.
+  pick   — PickScore: human-preference-tuned CLIP (yuvalkirstain/PickScore_v1).
+  mclip  — multilingual CLIPScore via SigLIP-multilingual (for --text translated;
+           clip/pick have English-only text towers).
+  vqa    — VQAScore via `t2v_metrics` (default clip-flant5-xxl); needs a
+           dedicated env (see README); skipped if the package is absent.
 
 Usage:
-  python compute_t2i_metrics.py --mock                 # plumbing test, no download
-  python compute_t2i_metrics.py --metrics clip pick    # real, needs GPU
-  python compute_t2i_metrics.py --limit 20             # smoke-test model loading
-Resumable: (item, metric) rows already in results/t2i_scores.csv are skipped.
+  python compute_t2i_metrics.py --mock                    # english plumbing test
+  python compute_t2i_metrics.py --mock --text translated  # xlingual plumbing test
+  python compute_t2i_metrics.py --metrics clip pick       # english run (GPU)
+  python compute_t2i_metrics.py --text translated         # xlingual run (GPU)
+Resumable: english on (item, metric); translated on (item, lang, metric).
 """
 import argparse
 import csv
@@ -52,6 +61,13 @@ FIELDS = ["item", "id", "domain", "subcategory", "socio_attr", "gender", "knob",
 CLIP_MODEL = "openai/clip-vit-large-patch14"
 PICK_MODEL = "yuvalkirstain/PickScore_v1"
 PICK_PROC = "laion/CLIP-ViT-H-14-laion2B-s32B-b79K"
+# Multilingual image-text backbone (SigLIP multilingual) — its text encoder
+# handles the translated prompts directly, which CLIP/PickScore (English-only
+# text towers) cannot. Used for the cross-lingual T2I run (--text translated).
+MCLIP_MODEL = "google/siglip-base-patch16-256-multilingual"
+
+# Languages for the cross-lingual run (matches the VLM eval's ACTIVE_LANGUAGES).
+XLING_LANGS = ["en", "zh", "ru", "ar", "hi", "bn", "el"]
 
 
 # --------------------------------------------------------------------------- #
@@ -115,12 +131,41 @@ class PickScorer:
         return float(s.item())
 
 
+class MCLIPScorer:
+    """Multilingual image-text scorer (SigLIP multilingual).
+
+    Lets us score the ACTUAL translated prompts — CLIP/PickScore have
+    English-only text towers, so the cross-lingual T2I question (mentor: "run
+    the evaluation on the translated prompts") needs a multilingual backbone.
+    Same combined-forward pattern as CLIPScorer; SigLIP needs max_length padding.
+    """
+    def __init__(self, model_name=MCLIP_MODEL):
+        import torch
+        from transformers import AutoModel, AutoProcessor
+        self.torch = torch
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.model = AutoModel.from_pretrained(model_name).to(self.device).eval()
+        self.proc = AutoProcessor.from_pretrained(model_name)
+
+    def score(self, image, text):
+        t = self.torch
+        inp = self.proc(text=[text], images=[image], padding="max_length",
+                        max_length=64, truncation=True, return_tensors="pt").to(self.device)
+        with t.no_grad():
+            out = self.model(**inp)
+            ie = out.image_embeds / out.image_embeds.norm(dim=-1, keepdim=True)
+            te = out.text_embeds / out.text_embeds.norm(dim=-1, keepdim=True)
+            cos = (ie * te).sum(-1)
+        return float(cos.item())
+
+
 class VQAScorer:
     """VQAScore (Lin et al. 2024) via the optional `t2v_metrics` package.
 
-    P(image entails text) from a VQA model. Heavy (clip-flant5); off by default.
+    P(image entails text) from a VQA model. Heavy; the mentor asks for the
+    package default clip-flant5-xxl in a dedicated environment.
     """
-    def __init__(self, model="clip-flant5-xl"):
+    def __init__(self, model="clip-flant5-xxl"):
         import t2v_metrics  # optional dependency
         self.metric = t2v_metrics.VQAScore(model=model)
 
@@ -133,7 +178,7 @@ class VQAScorer:
         return float(s.reshape(-1)[0])
 
 
-SCORERS = {"clip": CLIPScorer, "pick": PickScorer, "vqa": VQAScorer}
+SCORERS = {"clip": CLIPScorer, "pick": PickScorer, "mclip": MCLIPScorer, "vqa": VQAScorer}
 
 
 def build_scorer(name, mock, seed):
@@ -164,45 +209,37 @@ def mock_rows():
     return out
 
 
-def already_done(path):
+OUT_X = RESULTS / "t2i_scores_xlingual.csv"           # cross-lingual output
+FIELDS_X = FIELDS[:7] + ["lang"] + FIELDS[7:]          # insert `lang` before metric
+
+
+def already_done(path, key):
+    """Set of already-scored keys. key(r) -> tuple built from a CSV row dict."""
     done = set()
     if path.exists():
         with open(path) as f:
             for r in csv.DictReader(f):
-                done.add((int(r["item"]), r["metric"]))
+                done.add(key(r))
     return done
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--mock", action="store_true",
-                    help="random scores, no model download (plumbing test)")
-    ap.add_argument("--metrics", nargs="+", default=["clip", "pick"],
-                    choices=list(SCORERS), help="which metrics to compute")
-    ap.add_argument("--limit", type=int, default=None,
-                    help="only the first N items (smoke-test model loading)")
-    ap.add_argument("--seed", type=int, default=42)
-    args = ap.parse_args()
-    RESULTS.mkdir(exist_ok=True)
+def load_translations(override=None):
+    """Locate translations.json across both repo and flat-cluster layouts."""
+    import json
+    cands = ([Path(override)] if override else []) + [
+        ROOT / "shared/code/results/translations.json",   # repo layout
+        Path.cwd() / "results/translations.json",         # cluster flat dir
+        HERE / "results/translations.json",
+    ]
+    for p in cands:
+        if p.exists():
+            print(f"translations: {p}")
+            return json.loads(p.read_text())
+    raise SystemExit("translations.json not found; pass --translations PATH. "
+                     f"Tried: {[str(c) for c in cands]}")
 
-    if args.mock:
-        data_utils = None
-        rows = mock_rows()
-    else:
-        import data_utils  # from shared/code, added to sys.path above
-        rows = data_utils.sample_rows()
-    if args.limit:
-        rows = rows[:args.limit]
-    done = already_done(OUT)
 
-    # Build only the scorers with outstanding work (loading is expensive).
-    todo_metrics = [m for m in args.metrics
-                    if any((r["row_index"], m) not in done for r in rows)]
-    if not todo_metrics:
-        print("Nothing to do — all (item, metric) pairs already scored.")
-        return
-    print(f"Metrics: {todo_metrics}  |  items: {len(rows)}"
-          f"{' [MOCK]' if args.mock else ''}  ->  {OUT.name}")
+def build_scorers(todo_metrics, args):
     scorers = {}
     for m in todo_metrics:
         try:
@@ -211,40 +248,121 @@ def main():
             print(f"  ! skipping metric '{m}': {type(e).__name__}: {e}")
     if not scorers:
         raise SystemExit("No usable scorers.")
+    return scorers
 
-    new_file = not OUT.exists()
+
+def run_english(rows, args):
+    """Original path: score the English `text`, one row per (item, metric)."""
+    done = already_done(OUT, lambda r: (int(r["item"]), r["metric"]))
+    todo = [m for m in args.metrics if any((r["row_index"], m) not in done for r in rows)]
+    if not todo:
+        print("Nothing to do — all (item, metric) pairs already scored."); return
+    print(f"[english] metrics: {todo}  |  items: {len(rows)}"
+          f"{' [MOCK]' if args.mock else ''}  ->  {OUT.name}")
+    scorers = build_scorers(todo, args)
+    if not args.mock:
+        import data_utils
     from tqdm import tqdm
-    n_written = 0
+    new_file = not OUT.exists(); n = 0
     with open(OUT, "a", newline="") as fout:
         w = csv.DictWriter(fout, fieldnames=FIELDS)
         if new_file:
             w.writeheader()
         for r in tqdm(rows, desc="items"):
             item = r["row_index"]
-            pending = [m for m in scorers if (item, m) not in done]
-            if not pending:
+            pend = [m for m in scorers if (item, m) not in done]
+            if not pend:
                 continue
-            if args.mock:
-                correct_img = adv_img = None  # MockScorer ignores the image
-            else:
-                correct_img, adv_img = data_utils.get_image_pair(item)
-            text = r["text"]  # English neutral description
-            for m in pending:
-                sc = scorers[m]
-                s_c = sc.score(correct_img, text)
-                s_a = sc.score(adv_img, text)
-                margin = s_c - s_a
-                w.writerow({
-                    "item": item, "id": r["id"], "domain": r["domain"],
-                    "subcategory": r["subcategory"], "socio_attr": r["socio_attr"],
-                    "gender": r["gender"], "knob": r["knob"], "metric": m,
-                    "score_correct": round(s_c, 6), "score_adv": round(s_a, 6),
-                    "margin": round(margin, 6),
-                    "prefers_correct": int(margin > 0),
-                })
-                fout.flush()
-                n_written += 1
-    print(f"Wrote {n_written} rows -> {OUT}")
+            ci, ai = (None, None) if args.mock else data_utils.get_image_pair(item)
+            for m in pend:
+                sc, ac = scorers[m].score(ci, r["text"]), scorers[m].score(ai, r["text"])
+                w.writerow({"item": item, "id": r["id"], "domain": r["domain"],
+                            "subcategory": r["subcategory"], "socio_attr": r["socio_attr"],
+                            "gender": r["gender"], "knob": r["knob"], "metric": m,
+                            "score_correct": round(sc, 6), "score_adv": round(ac, 6),
+                            "margin": round(sc - ac, 6), "prefers_correct": int(sc - ac > 0)})
+                fout.flush(); n += 1
+    print(f"Wrote {n} rows -> {OUT}")
+
+
+def run_translated(rows, args):
+    """Cross-lingual path: score the TRANSLATED prompt for each language, one row
+    per (item, lang, metric). The mentor's ask — run the eval on translated
+    prompts — needs a multilingual scorer (default: mclip / SigLIP-multilingual).
+    """
+    tr = load_translations(args.translations)
+    done = already_done(OUT_X, lambda r: (int(r["item"]), r["lang"], r["metric"]))
+    todo = [m for m in args.metrics
+            if any((r["row_index"], l, m) not in done for r in rows for l in args.langs)]
+    if not todo:
+        print("Nothing to do — all (item, lang, metric) already scored."); return
+    print(f"[translated] metrics: {todo}  |  langs: {args.langs}  |  items: {len(rows)}"
+          f"{' [MOCK]' if args.mock else ''}  ->  {OUT_X.name}")
+    scorers = build_scorers(todo, args)
+    if not args.mock:
+        import data_utils
+    from tqdm import tqdm
+    new_file = not OUT_X.exists(); n = 0
+    with open(OUT_X, "a", newline="") as fout:
+        w = csv.DictWriter(fout, fieldnames=FIELDS_X)
+        if new_file:
+            w.writeheader()
+        for r in tqdm(rows, desc="items"):
+            item, rid = r["row_index"], r["id"]
+            langs_pending = [l for l in args.langs
+                             if any((item, l, m) not in done for m in scorers)
+                             and tr.get(rid, {}).get(l)]
+            if not langs_pending:
+                continue
+            ci, ai = (None, None) if args.mock else data_utils.get_image_pair(item)
+            for l in langs_pending:
+                text = tr[rid][l]
+                for m in scorers:
+                    if (item, l, m) in done:
+                        continue
+                    sc, ac = scorers[m].score(ci, text), scorers[m].score(ai, text)
+                    w.writerow({"item": item, "id": rid, "domain": r["domain"],
+                                "subcategory": r["subcategory"], "socio_attr": r["socio_attr"],
+                                "gender": r["gender"], "knob": r["knob"], "lang": l, "metric": m,
+                                "score_correct": round(sc, 6), "score_adv": round(ac, 6),
+                                "margin": round(sc - ac, 6), "prefers_correct": int(sc - ac > 0)})
+                    fout.flush(); n += 1
+    print(f"Wrote {n} rows -> {OUT_X}")
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--mock", action="store_true",
+                    help="random scores, no model download (plumbing test)")
+    ap.add_argument("--text", choices=["english", "translated"], default="english",
+                    help="english: score the English prompt (clip/pick). "
+                         "translated: score each language's prompt (needs mclip).")
+    ap.add_argument("--metrics", nargs="+", default=None, choices=list(SCORERS),
+                    help="metrics to compute (default: clip pick for english, mclip for translated)")
+    ap.add_argument("--langs", nargs="+", default=XLING_LANGS,
+                    help="languages for --text translated")
+    ap.add_argument("--translations", default=None,
+                    help="path to translations.json (auto-located if omitted)")
+    ap.add_argument("--limit", type=int, default=None,
+                    help="only the first N items (smoke-test model loading)")
+    ap.add_argument("--seed", type=int, default=42)
+    args = ap.parse_args()
+    RESULTS.mkdir(exist_ok=True)
+    if args.metrics is None:
+        args.metrics = ["mclip"] if args.text == "translated" else ["clip", "pick"]
+
+    if args.mock:
+        rows = mock_rows()
+    else:
+        import data_utils  # from shared/code, added to sys.path above
+        rows = data_utils.sample_rows()
+    if args.limit:
+        rows = rows[:args.limit]
+
+    if args.text == "translated":
+        run_translated(rows, args)
+    else:
+        run_english(rows, args)
 
 
 if __name__ == "__main__":
