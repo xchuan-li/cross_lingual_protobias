@@ -103,6 +103,29 @@ the typical image the VLM picks correct only ~0.34–0.41. VLM–metric agreemen
 phenomenon at two levels — so prototypicality bias is a property of the shared
 image-text representation, not an artifact of one model's answer generation.
 
+## Cross-lingual result (mclip on the translated prompts, 900 items × 7 langs)
+
+The mentor asked to run the T2I evaluation on the translated prompts. Using
+SigLIP-multilingual (`mclip`) on the real translated text gives a clean
+**dissociation** (fig `figK_xlingual_bias_mclip.png`):
+
+- The representation is prototypicality-biased in **every** language — metric
+  bias rate 0.58–0.66, all far above 0.5.
+- But it is **flat across languages** — no Bengali/Greek amplification (Bengali
+  is if anything slightly *lower*, 0.58 vs English 0.65; all CIs overlap).
+
+So the two axes split by level:
+- **Attribute bias → representational**: VLM, CLIP, PickScore and mclip all show
+  the wealth/power >> morality/intellect pattern.
+- **Language effect → NOT in the shared representation**: the behavioural
+  Bengali/Greek lift does not appear in the multilingual embedding, so it arises
+  in the VLM's own language handling / decoding, not in image–text alignment.
+
+Caveat: SigLIP-multilingual is trained to align many languages *equally* well, so
+it is not expected to penalise low-resource languages — this shows the effect is
+absent from *this* representation, not that it is absent from every VLM's own
+text encoder.
+
 ## Scope / caveats
 - **English text only** by design: this isolates the *representation* question.
   The cross-lingual axis stays with the VLM behaviour (exp3a/b). A multilingual
