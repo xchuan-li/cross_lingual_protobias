@@ -163,7 +163,8 @@ class VQAScorer:
     """VQAScore (Lin et al. 2024) via the optional `t2v_metrics` package.
 
     P(image entails text) from a VQA model. Heavy; the mentor asks for the
-    package default clip-flant5-xxl in a dedicated environment.
+    package default clip-flant5-xxl (~11B, needs ~22GB → an A40 / 2×T4 / 8-bit).
+    clip-flant5-xl (~3B) fits a single 16GB T4 and is the safe fallback.
     """
     def __init__(self, model="clip-flant5-xxl"):
         import t2v_metrics  # optional dependency
@@ -181,9 +182,11 @@ class VQAScorer:
 SCORERS = {"clip": CLIPScorer, "pick": PickScorer, "mclip": MCLIPScorer, "vqa": VQAScorer}
 
 
-def build_scorer(name, mock, seed):
+def build_scorer(name, mock, seed, vqa_model=None):
     if mock:
         return MockScorer(seed=seed + hash(name) % 1000)
+    if name == "vqa" and vqa_model:
+        return VQAScorer(model=vqa_model)
     return SCORERS[name]()
 
 
@@ -243,7 +246,8 @@ def build_scorers(todo_metrics, args):
     scorers = {}
     for m in todo_metrics:
         try:
-            scorers[m] = build_scorer(m, args.mock, args.seed)
+            scorers[m] = build_scorer(m, args.mock, args.seed,
+                                      vqa_model=getattr(args, "vqa_model", None))
         except Exception as e:  # e.g. t2v_metrics not installed
             print(f"  ! skipping metric '{m}': {type(e).__name__}: {e}")
     if not scorers:
@@ -343,6 +347,9 @@ def main():
                     help="languages for --text translated")
     ap.add_argument("--translations", default=None,
                     help="path to translations.json (auto-located if omitted)")
+    ap.add_argument("--vqa-model", default="clip-flant5-xxl",
+                    help="t2v_metrics model for --metrics vqa "
+                         "(clip-flant5-xxl needs ~22GB; clip-flant5-xl fits a 16GB T4)")
     ap.add_argument("--limit", type=int, default=None,
                     help="only the first N items (smoke-test model loading)")
     ap.add_argument("--seed", type=int, default=42)
