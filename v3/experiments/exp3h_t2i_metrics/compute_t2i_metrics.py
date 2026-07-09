@@ -177,7 +177,6 @@ class VQABlip2Scorer:
         self.proc = Blip2Processor.from_pretrained(model_name)
         self.model = Blip2ForConditionalGeneration.from_pretrained(
             model_name, torch_dtype=self.dtype).to(self.device).eval()
-        self.dec_start = self.model.config.text_config.decoder_start_token_id or 0
         # token ids that spell "yes" (handle SentencePiece ▁ prefix + casing)
         ids = set()
         for w in ["yes", "Yes", " yes", " Yes"]:
@@ -187,13 +186,17 @@ class VQABlip2Scorer:
         self.yes_ids = sorted(ids)
 
     def score(self, image, text):
+        # P("yes") from the FIRST generated token — the same generate() path that
+        # yields the model's yes/no answer, so the probability is consistent with
+        # what the model actually decodes (a manual decoder forward read the wrong
+        # position and returned ~uniform prob).
         t = self.torch
         prompt = f'Question: Does this image show "{text}"? Answer:'
         inp = self.proc(images=image, text=prompt, return_tensors="pt").to(self.device, self.dtype)
-        dec = t.tensor([[self.dec_start]], device=self.device)
         with t.no_grad():
-            logits = self.model(**inp, decoder_input_ids=dec).logits  # [1,1,vocab]
-            probs = logits[0, -1].float().softmax(-1)
+            out = self.model.generate(**inp, max_new_tokens=1,
+                                      output_scores=True, return_dict_in_generate=True)
+            probs = out.scores[0][0].float().softmax(-1)
             p_yes = probs[self.yes_ids].sum().item()
         return p_yes
 
