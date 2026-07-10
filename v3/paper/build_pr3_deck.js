@@ -98,11 +98,38 @@ pageNo(s);
 // ============================================================ S2b · EXAMPLE PAIRS
 s = pres.addSlide(); s.background = { color: PAPER };
 kicker(s, "The data · one pair per domain");
-title(s, "Semantically-correct (SC) vs prototypical-adversarial (PA)", { fontSize: 27 });
-fig(s, "v1/paper/assets/protobias_examples.png", { x: 3.35, y: 1.6, w: 6.65, ratio: 1.445 });
-caption(s, "Each prompt pairs a correct-but-atypical (SC) image with a typical-but-wrong (PA) one. "
-   + "Most automatic judges (CLIP / Pick / VQA / GPT-4o) fall for PA; humans and ProtoScore prefer SC.",
-   { x: 1.4, y: 6.7, w: 10.5 });
+title(s, "Semantically-correct (SC) vs prototypical-adversarial (PA)", { fontSize: 26 });
+{
+  const imgW = 1.92, ratio = 1.5, scX = 1.85, paX = 4.05, judgeX = 6.35, hY = 1.68;
+  // column headers
+  const colhdr = (t, x, w) => s.addText(t.toUpperCase(), { x, y: hY, w, h: 0.3,
+    fontFace: BODY, fontSize: 10.5, bold: true, color: MUTE, charSpacing: 1.5, align: "center", margin: 0 });
+  colhdr("Correct (SC)", scX, imgW);
+  colhdr("Typical (PA)", paX, imgW);
+  s.addText("WHO PREFERS THE CORRECT IMAGE?", { x: judgeX, y: hY, w: 6.0, h: 0.3, fontFace: BODY,
+    fontSize: 10.5, bold: true, color: MUTE, charSpacing: 1.5, margin: 0 });
+  const EX = [
+    ["Animals", "“An animal by a pond with exactly two bamboo stalks.”", "animal_sc.png", "animal_pa.png"],
+    ["Demography", "“The surgeon in the operating room.”", "demography_sc.png", "demography_pa.png"],
+    ["Objects", "“A vehicle on a street with exactly two traffic cones.”", "object_sc.png", "object_pa.png"],
+  ];
+  EX.forEach((r, i) => {
+    const yr = 2.05 + i * 1.62;
+    s.addText(r[0], { x: 0.45, y: yr + 0.5, w: 1.35, h: 0.5, fontFace: HEAD, fontSize: 13,
+      bold: true, color: INK, align: "center", margin: 0 });
+    s.addText(r[1], { x: scX, y: yr, w: 8.4, h: 0.28, fontFace: BODY, fontSize: 11.5,
+      italic: true, color: TXT, margin: 0 });
+    fig(s, "v3/paper/assets/examples/" + r[2], { x: scX, y: yr + 0.3, w: imgW, ratio });
+    fig(s, "v3/paper/assets/examples/" + r[3], { x: paX, y: yr + 0.3, w: imgW, ratio });
+    s.addText([
+      { text: "✓ Human    ✓ ProtoScore", options: { color: GREEN, bold: true, breakLine: true } },
+      { text: "✗ CLIP    ✗ Pick    ✗ VQA", options: { color: CORAL, bold: true } },
+    ], { x: judgeX, y: yr + 0.5, w: 6.0, h: 1.0, fontFace: BODY, fontSize: 12.5,
+      valign: "top", margin: 0, paraSpaceAfter: 6 });
+  });
+}
+caption(s, "Illustrative examples. Most automatic judges prefer the typical-but-wrong (PA) image; humans & ProtoScore prefer the correct (SC) one.",
+   { x: 1.4, y: 7.02, w: 10.5 });
 pageNo(s);
 
 // ============================================================ S3 · EXTENSION
