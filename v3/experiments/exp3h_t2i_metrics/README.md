@@ -103,6 +103,14 @@ the typical image the VLM picks correct only ~0.34–0.41. VLM–metric agreemen
 phenomenon at two levels — so prototypicality bias is a property of the shared
 image-text representation, not an artifact of one model's answer generation.
 
+**4. VQAScore (clip-flant5-xxl, the mentor's default, on the A40).** The
+strongest T2I metric is the most robust: overall bias rate **0.47** (near
+chance — it is NOT systematically fooled the way CLIP 0.71 / Pick 0.67 are). But
+the attribute signature survives — demography bias rate still falls
+wealth(0.61) → intellect(0.44), and the VLM's choice tracks VQAScore just as
+strongly (tracking gap +0.27 to +0.34). So even a strong VQA-based scorer keeps
+the wealth peak, and behaviour tracks all three metrics.
+
 ## Cross-lingual result (mclip on the translated prompts, 900 items × 7 langs)
 
 The mentor asked to run the T2I evaluation on the translated prompts. Using

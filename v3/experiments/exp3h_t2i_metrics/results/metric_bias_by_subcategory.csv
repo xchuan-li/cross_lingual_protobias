@@ -11,3 +11,9 @@ mammal,0.392,97.0,0.301,0.491,0.4026,pick,animal
 furniture,0.549,91.0,0.447,0.648,-0.1869,pick,object
 tableware,0.68,100.0,0.583,0.763,-0.6389,pick,object
 vehicle,0.807,109.0,0.723,0.87,-0.7021,pick,object
+animal,0.637,91.0,0.535,0.729,0.025,vqa,animal
+bird,0.33,112.0,0.25,0.422,0.0496,vqa,animal
+mammal,0.433,97.0,0.339,0.532,0.0165,vqa,animal
+furniture,0.473,91.0,0.373,0.574,0.0091,vqa,object
+tableware,0.38,100.0,0.291,0.478,0.0539,vqa,object
+vehicle,0.514,109.0,0.421,0.606,0.023,vqa,object
