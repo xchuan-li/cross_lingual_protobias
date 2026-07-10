@@ -34,10 +34,20 @@ function title(s, t, { y = 0.92, w = W - 2 * M, color = TXT, fontSize = 32, x = 
 }
 function bullets(s, items, { x = M, y = 2.15, w = 6.6, h = 4.6, fontSize = 17,
   color = TXT, gap = 11 } = {}) {
-  s.addText(items.map((it) => ({
-    text: it, options: { bullet: { indent: 16 }, breakLine: true,
-      paraSpaceAfter: gap, color, fontSize },
-  })), { x, y, w, h, fontFace: BODY, valign: "top", margin: 0, lineSpacingMultiple: 1.0 });
+  // Each bullet is its OWN text box, stacked vertically, so every bullet is a
+  // separate animation target in PowerPoint (add "Appear" on click per box).
+  // Box heights are estimated from the wrapped line count.
+  const cpl = Math.max(8, Math.floor((w * 72) / (fontSize * 0.50)));  // chars/line
+  const lineH = (fontSize * 1.22) / 72;                                // inch per line
+  const gapIn = gap / 72 + 0.05;                                       // gap between boxes
+  let cy = y;
+  items.forEach((it) => {
+    const lines = Math.max(1, Math.ceil(it.length / cpl));
+    const bh = lines * lineH + 0.05;
+    s.addText(it, { x, y: cy, w, h: bh, fontFace: BODY, fontSize, color,
+      valign: "top", margin: 0, lineSpacingMultiple: 1.0, bullet: { indent: 16 } });
+    cy += bh + gapIn;
+  });
 }
 function fig(s, p, { x, y, w, ratio }) {
   s.addImage({ path: F(p), x, y, w, h: w / ratio });
