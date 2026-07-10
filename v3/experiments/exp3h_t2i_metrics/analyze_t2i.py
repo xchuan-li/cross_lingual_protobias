@@ -140,7 +140,7 @@ def main():
     ax.set_ylabel("metric bias rate\n(prefers typical-but-wrong image)")
     ax.set_ylim(0, 1)
     ax.set_title("All three T2I metrics keep the wealth→intellect gradient\n"
-                 "(CLIP/Pick fooled on ~70% of items; VQAScore more robust but still peaks on wealth)")
+                 "(CLIP/Pick fooled ~70%; VQAScore more robust, still peaks on wealth)")
     ax.legend(fontsize=9)
     fig.tight_layout(); fig.savefig(HERE / "figures/figI_metric_bias_by_attr.png", dpi=150)
 

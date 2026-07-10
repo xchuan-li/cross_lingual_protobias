@@ -198,7 +198,7 @@ s.addTable([
   [cel("“Check the other categories\n(animal & object)”", TXT, true),
    cel("Broke both down by subcategory + visual knob — they are structured too", MUTE), cel("7", CORAL, true)],
   [cel("“Add T2I metrics —\nVQAScore, CLIPScore, PickScore”", TXT, true),
-   cel("CLIPScore & PickScore done (10–11); also on the translated prompts (13). VQAScore pending the cluster.", MUTE), cel("10–13", CORAL, true)],
+   cel("All three done (10–11): CLIPScore, PickScore & VQAScore; also on the translated prompts (13).", MUTE), cel("10–13", CORAL, true)],
   [cel("“Add image examples & animation”", TXT, true),
    cel("Example pairs added (3); click-through explorer in backup; click-builds noted", MUTE), cel("3", CORAL, true)],
 ], { x: M, y: 2.3, w: W - 2 * M, colW: [4.3, 5.65, 1.9], rowH: [0.5, 1.1, 1.1, 0.8],
@@ -254,13 +254,13 @@ s = pres.addSlide(); s.background = { color: PAPER };
 kicker(s, "New headline · answering “add T2I metrics”");
 title(s, "The bias lives in the representation, not the answer");
 bullets(s, [
-  "New angle: score each pair with CLIPScore & PickScore — no VLM asked, just image–text alignment.",
-  "Both metrics prefer the typical-but-wrong image on ~70% of items (CLIP 0.71, Pick 0.67).",
-  "And they show the SAME attribute signature: strongest on wealth/power, fading to morality/intellect.",
+  "New angle: score each pair with CLIPScore, PickScore & VQAScore — no VLM asked, just image–text alignment.",
+  "CLIP & Pick prefer the typical-but-wrong image on ~70% of items; VQAScore (clip-flant5-xxl) is more robust (~0.47).",
+  "But all three keep the SAME attribute signature: strongest on wealth, fading to morality/intellect.",
   "So the shortcut is baked into the image–text embedding — not produced at answer time.",
-], { y: 2.1, w: 5.3, fontSize: 15.5 });
+], { y: 2.1, w: 5.3, fontSize: 15 });
 fig(s, "v3/experiments/exp3h_t2i_metrics/figures/figI_metric_bias_by_attr.png", { x: 6.5, y: 2.35, w: 6.2, ratio: 1.674 });
-caption(s, "Metric bias rate by socio-attribute — CLIPScore & PickScore (0.5 = no representational bias).", { x: 6.5, y: 6.1, w: 6.2 });
+caption(s, "Metric bias rate by socio-attribute — CLIPScore / PickScore / VQAScore (0.5 = no representational bias).", { x: 6.5, y: 6.1, w: 6.2 });
 pageNo(s);
 
 // ============================================================ S10 · VLM TRACKS METRIC (exp3h)
@@ -372,7 +372,7 @@ const tk = (y, n, head, body, c) => {
 };
 tk(1.95, "1", "Source — the attribute", "A visual prototype exists for wealth and status, not for morality or intellect. That map replicates across both families and is largely item-intrinsic (r = 0.68).", CORAL);
 tk(3.5, "2", "Trigger — signal weakness", "The model falls back on the prototype when the discriminating cue is hard to perceive (count, scale) OR the prompt language is unfamiliar (Bengali, Greek).", BLUE);
-tk(5.05, "3", "Home — the representation", "CLIPScore & PickScore carry the same attribute signature, and the VLM's choice tracks them. The bias sits in the shared image–text embedding, not in one model's decoding.", GREEN);
+tk(5.05, "3", "Home — the representation", "CLIPScore, PickScore & VQAScore all carry the same attribute signature, and the VLM's choice tracks them. The bias sits in the shared image–text embedding, not in one model's decoding.", GREEN);
 s.addText("Attribute sets whether a shortcut exists · weakness sets how much it's taken · the representation is where it lives.",
   { x: M, y: 6.55, w: 12.0, h: 0.5, fontFace: HEAD, fontSize: 14, italic: true, color: CORAL, margin: 0 });
 pageNo(s);
@@ -394,7 +394,7 @@ s = pres.addSlide(); s.background = { color: PAPER };
 kicker(s, "Outlook");
 title(s, "Next steps");
 const ol = [
-  ["VQAScore — pending", "clip-flant5-xxl is set up; the FAU GPU cluster (Alex) has been offline ~1 week for a kernel security patch. Adds as the third T2I metric once it returns."],
+  ["Multilingual VQAScore", "VQAScore (clip-flant5-xxl) is done in English; extend it to the translated prompts, as we did for CLIP."],
   ["Scale axis", "Qwen-32B in 4-bit on a single GPU — does the bias shrink with model size?"],
   ["More model families", "Gemma-3, LLaVA-OneVision — how general is the language effect?"],
   ["Pin down language", "Disentangle resource vs script vs cultural loading behind the ar / bn / el spike."],
