@@ -6,7 +6,7 @@
 const pptxgen = require("pptxgenjs");
 const path = require("path");
 
-const ROOT = "/Users/xiaochuan/Desktop/Projects/_Archive-2026-07/ProtoBias";
+const ROOT = "/Users/xiaochuan/Desktop/Projects/ProtoBias";
 const F = (p) => path.join(ROOT, p);
 
 // ---- palette (indigo academic; coral/blue match the matplotlib figures) ----
@@ -95,6 +95,16 @@ fig(s, "v1/paper/assets/protobias_examples_animals_objects.png", { x: 7.35, y: 2
 caption(s, "Correct-but-atypical (left) vs prototypical-but-wrong (right).", { x: 7.35, y: 5.55, w: 5.45 });
 pageNo(s);
 
+// ============================================================ S2b · EXAMPLE PAIRS
+s = pres.addSlide(); s.background = { color: PAPER };
+kicker(s, "The data · one pair per domain");
+title(s, "Semantically-correct (SC) vs prototypical-adversarial (PA)", { fontSize: 27 });
+fig(s, "v1/paper/assets/protobias_examples.png", { x: 3.35, y: 1.6, w: 6.65, ratio: 1.445 });
+caption(s, "Each prompt pairs a correct-but-atypical (SC) image with a typical-but-wrong (PA) one. "
+   + "Most automatic judges (CLIP / Pick / VQA / GPT-4o) fall for PA; humans and ProtoScore prefer SC.",
+   { x: 1.4, y: 6.7, w: 10.5 });
+pageNo(s);
+
 // ============================================================ S3 · EXTENSION
 s = pres.addSlide(); s.background = { color: PAPER };
 kicker(s, "Our extension");
@@ -149,11 +159,11 @@ const cel = (t, c = TXT, b = false) => ({ text: t, options: { color: c, bold: b,
 s.addTable([
   [hdr("Feedback on Report II"), hdr("What we did"), hdr("Slide")],
   [cel("“Check the other categories\n(animal & object)”", TXT, true),
-   cel("Broke both down by subcategory + visual knob — they are structured too", MUTE), cel("6", CORAL, true)],
+   cel("Broke both down by subcategory + visual knob — they are structured too", MUTE), cel("7", CORAL, true)],
   [cel("“Add T2I metrics —\nVQAScore, CLIPScore, PickScore”", TXT, true),
-   cel("Scored every pair with CLIPScore & PickScore → the bias is in the representation", MUTE), cel("9–10", CORAL, true)],
-  [cel("“Add animation for readability”", TXT, true),
-   cel("Progressive builds + the click-through model explorer (backup)", MUTE), cel("—", MUTE)],
+   cel("CLIPScore & PickScore done (10–11); also on the translated prompts (13). VQAScore pending the cluster.", MUTE), cel("10–13", CORAL, true)],
+  [cel("“Add image examples & animation”", TXT, true),
+   cel("Example pairs added (3); click-through explorer in backup; click-builds noted", MUTE), cel("3", CORAL, true)],
 ], { x: M, y: 2.3, w: W - 2 * M, colW: [4.3, 5.65, 1.9], rowH: [0.5, 1.1, 1.1, 0.8],
   border: { pt: 0.5, color: CLINE }, fill: { color: PAPER }, fontFace: BODY, valign: "middle", margin: [5, 8, 5, 8] });
 s.addText("The two substantive asks became the two new results in this report.",
@@ -250,6 +260,20 @@ s.addChart(pres.charts.BAR, [
   titleFontSize: 12, titleColor: TXT });
 pageNo(s);
 
+// ============================================================ S11b · T2I ON TRANSLATED PROMPTS
+s = pres.addSlide(); s.background = { color: PAPER };
+kicker(s, "New · T2I metrics on the translated prompts");
+title(s, "The language effect is NOT in the representation");
+bullets(s, [
+  "We scored the translated prompts with a multilingual CLIP (mentor request).",
+  "The representation is biased in every language (0.58–0.66, all above chance).",
+  "But it is flat across languages — no Bengali/Greek lift (Bengali is if anything lower).",
+  "A clean split: the attribute bias is representational; the language effect comes from the VLM's own language handling, not image–text alignment.",
+], { y: 2.1, w: 5.4, fontSize: 15.5 });
+fig(s, "v3/experiments/exp3h_t2i_metrics/figures/figK_xlingual_bias_mclip.png", { x: 6.35, y: 2.5, w: 6.3, ratio: 1.767 });
+caption(s, "Multilingual-CLIP bias rate by language; grey = English reference.", { x: 6.35, y: 6.2, w: 6.3 });
+pageNo(s);
+
 // ============================================================ S12 · TRANSLATION QA
 s = pres.addSlide(); s.background = { color: PAPER };
 kicker(s, "Language result · rigor");
@@ -333,9 +357,9 @@ s = pres.addSlide(); s.background = { color: PAPER };
 kicker(s, "Outlook");
 title(s, "Next steps");
 const ol = [
-  ["Add VQAScore", "Third T2I metric (VQA-model based) — does a generative scorer show the same signature?"],
-  ["Multilingual CLIP", "Score the translated prompts — does the representation carry the language effect too?"],
+  ["VQAScore — pending", "clip-flant5-xxl is set up; the FAU GPU cluster (Alex) has been offline ~1 week for a kernel security patch. Adds as the third T2I metric once it returns."],
   ["Scale axis", "Qwen-32B in 4-bit on a single GPU — does the bias shrink with model size?"],
+  ["More model families", "Gemma-3, LLaVA-OneVision — how general is the language effect?"],
   ["Pin down language", "Disentangle resource vs script vs cultural loading behind the ar / bn / el spike."],
 ];
 ol.forEach((r, i) => {
