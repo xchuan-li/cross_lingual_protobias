@@ -253,6 +253,9 @@ pageNo(s);
 s = pres.addSlide(); s.background = { color: PAPER };
 kicker(s, "New headline · answering “add T2I metrics”");
 title(s, "The bias lives in the representation, not the answer");
+s.addNotes(`Thanks, Rishav. So far we've seen the bias is attribute-specific and shows up in both models. Now I want to ask a deeper question: where does this bias actually live? Is it just how the model answers, or is it baked in deeper? To test this, we dropped the VLM entirely and used three text-to-image metrics — CLIPScore, PickScore, and VQAScore — that just measure how well an image matches the text. And look: CLIPScore and PickScore fall for the typical-but-wrong image on about 70% of items. VQAScore, the strongest one, is more robust — it's near chance overall — but all three keep the exact same shape: the bias peaks on wealth and fades out toward morality and intellect. So the shortcut isn't something the model invents when answering; it's already sitting in the image-text representation.
+
+[中文参考] 谢谢 Rishav。目前看到偏见是属性特异的、两个模型都有。现在问更深一层:它到底住在哪儿——是答题时才产生,还是更底层烙进去了?我们把 VLM 拿掉,用三个图文对齐指标 CLIP、Pick、VQAScore,只衡量图文匹配度。CLIP 和 Pick 约七成选了典型但错的图;VQAScore 最强、最抗骗(整体接近随机),但三者形状一样:财富最高、往道德智力衰减。所以捷径不是答题时编出来的,它本来就在图文表征里。`);
 bullets(s, [
   "New angle: score each pair with CLIPScore, PickScore & VQAScore — no VLM asked, just image–text alignment.",
   "CLIP & Pick prefer the typical-but-wrong image on ~70% of items; VQAScore (clip-flant5-xxl) is more robust (~0.47).",
@@ -267,6 +270,9 @@ pageNo(s);
 s = pres.addSlide(); s.background = { color: PAPER };
 kicker(s, "New headline · the link");
 title(s, "The VLM's choice tracks the metric");
+s.addNotes(`And here's the link that ties it together. For every image pair, we asked: does the VLM pick the same image the metric scores higher? When the metric prefers the correct image, the VLM picks correct about 65 to 70 percent of the time. But when the metric leans toward the typical image, the VLM only gets it right about 35 to 40 percent. That's a gap of roughly 0.3, and it holds across both models and all three metrics. So the behavioural bias and the representational bias aren't two separate things — they're the same phenomenon showing up at two levels.
+
+[中文参考] 这一页把两者串起来。对每一对图我们问:VLM 选的是不是指标打分更高的那张?指标偏向正确图时,VLM 有 65–70% 选对;指标偏向典型图时,只有 35–40% 选对。差距约 0.3,两个模型、三个指标都成立。所以行为偏见和表征偏见不是两回事,是同一个现象在两个层面上的体现。`);
 bullets(s, [
   "For each pair: does the VLM pick the image the metric also scores higher?",
   "When the metric prefers the correct image, the VLM picks it ~0.65–0.70 of the time.",
@@ -281,6 +287,9 @@ pageNo(s);
 s = pres.addSlide(); s.background = { color: PAPER };
 kicker(s, "Recap result · the language axis");
 title(s, "Language is not flat after all");
+s.addNotes(`Okay, now the language question — our original motivation. With four languages, the bias looked totally flat across languages. But once we added Bengali and Greek — lower-resource, different scripts — a real effect showed up: prompts in Bengali and Greek trigger significantly more bias than English, and again, in both models. Importantly, the attribute pattern stays the same in every language; it's the overall level that shifts up. So language doesn't change what the model is biased about — it changes how strongly.
+
+[中文参考] 现在讲语言,这是我们最初的出发点。四种语言时偏见看着跨语言持平;一旦加上孟加拉语和希腊语(更低资源、不同文字),真效应就出来了:用这两种语言问,偏见显著比英语强,还是两个模型都这样。关键是属性模式每种语言都一样,变的是整体水平往上抬。所以语言不改变"偏什么",改变"偏多少"。`);
 bullets(s, [
   "Four languages looked invariant; adding Bengali & Greek revealed a real effect.",
   "Bengali and Greek prompts → significantly more bias than English, in both models.",
@@ -301,6 +310,9 @@ pageNo(s);
 s = pres.addSlide(); s.background = { color: PAPER };
 kicker(s, "New · T2I metrics on the translated prompts");
 title(s, "The language effect is NOT in the representation");
+s.addNotes(`But then we did something the mentor suggested — we ran the metrics on the translated prompts too, using a multilingual CLIP. And this gave us a really clean split. The representation is biased in every single language — all above chance. But it's flat across languages: no Bengali or Greek spike at all; if anything Bengali is slightly lower. So put these two slides together: the attribute bias lives in the representation, but the language effect does not — that one comes from how the VLM itself handles less-familiar languages, not from the image-text alignment.
+
+[中文参考] 然后我们做了导师建议的事:把指标也在翻译后的 prompt 上跑,用多语版 CLIP。这给了一个很干净的分离。表征在每一种语言里都有偏见,全超过随机;但跨语言是平的,完全没有孟加拉/希腊那个抬升,孟加拉语甚至略低。所以两页放一起:属性偏见住在表征里,语言效应不在——语言效应来自 VLM 自己怎么处理不熟悉的语言,不是图文对齐本身。`);
 bullets(s, [
   "We scored the translated prompts with a multilingual CLIP (mentor request).",
   "The representation is biased in every language (0.58–0.66, all above chance).",
@@ -315,6 +327,9 @@ pageNo(s);
 s = pres.addSlide(); s.background = { color: PAPER };
 kicker(s, "Language result · rigor");
 title(s, "Is it just bad translation? No.");
+s.addNotes(`Now, the obvious pushback: maybe Bengali and Greek just get worse translations, and that's the whole effect. So we back-translated every prompt and measured the drift. And it's actually the opposite of what you'd expect: the most-biased languages, Greek and Bengali, have the highest translation fidelity. The least-biased ones, Hindi and Russian, drift the most. If bad translation were driving the bias, that relationship would go the other way. So it's not a translation artifact.
+
+[中文参考] 一个很自然的质疑:会不会就是孟加拉语和希腊语翻得差,整个效应就这么来的?所以我们把每条 prompt 回译、量漂移。结果恰恰相反:偏见最强的希腊语、孟加拉语,翻译保真度最高;偏见最弱的印地语、俄语,反而漂得最多。要是翻译差导致偏见,这关系应该反过来。所以不是翻译伪影。`);
 bullets(s, [
   "We back-translated every non-English prompt and measured drift.",
   "The most-biased languages (Greek, Bengali) have the highest translation fidelity.",
@@ -338,6 +353,9 @@ pageNo(s);
 s = pres.addSlide(); s.background = { color: PAPER };
 kicker(s, "Going deeper · the confound");
 title(s, "Is it just a low-level visual cue? No.");
+s.addNotes(`Another confound: every adversarial image also tweaks one visual knob — count, colour, scale, layout, spatial. Maybe the model isn't reacting to prototypes at all, just to, say, colour. But if it were a colour artifact, colour would spike — and instead colour is the lowest. The bias is actually highest when the cue is hard to perceive, like count or scale. And critically, wealth still beats morality within every single knob. So the attribute effect isn't a knob artifact either.
+
+[中文参考] 另一个混杂:每张对抗图还改了一个视觉旋钮——数量、颜色、大小、布局、空间。也许模型不是在反应原型,只是在反应颜色?但若是颜色伪影,颜色应该最高——结果它最低。偏见反而在难察觉的线索上最高,比如数量、大小。而且最关键:每一个旋钮内部,财富都还是高于道德。所以属性效应也不是旋钮造成的假象。`);
 bullets(s, [
   "Every adversarial image also tweaks one visual knob — count / colour / scale / layout / spatial.",
   "If the bias were a colour artifact, colour would spike. Instead colour is the LOWEST (≈0.40).",
@@ -351,6 +369,9 @@ pageNo(s);
 s = pres.addSlide(); s.background = { color: PAPER };
 kicker(s, "Going deeper · is the trap objective?");
 title(s, "The same items fool both model families");
+s.addNotes(`One more check. Do the two models fail on the same image pairs, or different ones? We correlated their per-item error rates, and it's 0.68. So the trap is largely item-intrinsic — it's an objective property of the image pair itself, not just one model's quirk. It's not a perfect one, though — about half is still model-specific, strongest agreement on demography, weakest on objects.
+
+[中文参考] 再一个检验:两个模型是在同一批图对上翻车,还是各翻各的?把逐项错误率做相关,是 0.68。所以陷阱很大程度是"图对本身"的客观属性,不是某个模型的怪癖。不过也不完美——约一半仍是模型特有的,人物上最一致、物体上最弱。`);
 bullets(s, [
   "Two families judge the same 900 image pairs — do they err on the SAME ones?",
   "Per-item error rates correlate at r = 0.68 (Cohen's κ = 0.39).",
@@ -363,6 +384,9 @@ pageNo(s);
 // ============================================================ S15 · TAKEAWAY (dark)
 s = pres.addSlide(); s.background = { color: INK };
 kicker(s, "What we found", { color: CORAL });
+s.addNotes(`So let me pull it all together. The bias is a shortcut with three parts. First, a source — the attribute: a visual prototype exists for wealth and status, but not for morality or intellect, and that map is largely item-intrinsic. Second, a trigger — signal weakness: the model falls back on the prototype when the real cue is hard to perceive, or when the prompt language is unfamiliar. And third, a home — the representation: all three metrics carry the same signature, and the VLM's choice tracks them. So: the attribute decides whether a shortcut exists, signal-weakness decides how much it's taken, and the shared representation is where it lives.
+
+[中文参考] 收一下整个故事。这个偏见是有三部分的捷径。第一,来源——属性:财富、地位有视觉原型,道德、智力没有,而且这映射很大程度是图对本身固有的。第二,触发——信号弱:真线索难察觉、或语言不熟悉时,模型退回原型。第三,归宿——表征:三个指标都带同款签名,VLM 又跟着它们走。所以:属性决定"有没有捷径",信号弱决定"走多少",共享表征就是它住的地方。`);
 s.addText("A shortcut with a source, a trigger, and a home", { x: M, y: 0.95, w: 12.0, h: 0.9,
   fontFace: HEAD, fontSize: 28, bold: true, color: "FFFFFF", margin: 0 });
 const tk = (y, n, head, body, c) => {
@@ -381,6 +405,9 @@ pageNo(s);
 s = pres.addSlide(); s.background = { color: PAPER };
 kicker(s, "Limitations");
 title(s, "What we are not yet claiming");
+s.addNotes(`A few honest caveats. This is one seed and one translation backend. The adversarial knob co-varies with the prototype, so it's not a fully clean manipulation. Our demography cells are small — wealth is only about 31 items per language — so we lean on confidence intervals. The T2I metrics were mainly on the English prompt, though we've started extending them. And we had to drop Qwen-32B — it was just too slow on the hardware we had.
+
+[中文参考] 几个诚实的局限。单个随机种子、单个翻译后端。对抗旋钮和原型共变,不是完全干净的操纵。人物格子样本小——财富每种语言只有约 31 条——所以靠置信区间。T2I 指标主要用英文 prompt,不过已开始往多语言扩。还有 Qwen-32B 只能砍——现有硬件上太慢。`);
 bullets(s, [
   "Single seed, single translation backend; the adversarial “knob” (color / scale) is a co-varying confound.",
   "Demography cells are small (Wealth ≈ 31 / language) — mixed-effects pools, but power is limited.",
@@ -393,6 +420,9 @@ pageNo(s);
 s = pres.addSlide(); s.background = { color: PAPER };
 kicker(s, "Outlook");
 title(s, "Next steps");
+s.addNotes(`And where we're going. First, extend VQAScore to the translated prompts, the way we did for CLIP. Second, the scale axis — Qwen-32B in 4-bit — does the bias shrink as models get bigger? Third, more model families, to see how general the language effect is. And finally, pinning down the language effect itself — disentangling how much is resource, how much is script, and how much is cultural loading behind that Arabic-Bengali-Greek spike.
+
+[中文参考] 下一步方向。第一,把 VQAScore 扩到翻译后的 prompt,像对 CLIP 那样。第二,规模轴——4-bit 的 Qwen-32B——模型变大偏见会不会缩小?第三,加更多模型家族,看语言效应多普遍。最后,把语言效应本身搞清楚——在阿拉伯/孟加拉/希腊那个抬升背后,拆开多少是资源、多少是文字、多少是文化负载。`);
 const ol = [
   ["Multilingual VQAScore", "VQAScore (clip-flant5-xxl) is done in English; extend it to the translated prompts, as we did for CLIP."],
   ["Scale axis", "Qwen-32B in 4-bit on a single GPU — does the bias shrink with model size?"],
@@ -411,6 +441,9 @@ pageNo(s);
 // ============================================================ S18 · THANKS (dark)
 s = pres.addSlide(); s.background = { color: INK };
 dot(s, M, 2.5, CORAL); dot(s, M + 0.22, 2.5, BLUE); dot(s, M + 0.44, 2.5, GREEN);
+s.addNotes(`And that's it — we built the first multilingual, multi-model ProtoBias pipeline, across seven languages and two model families, and traced the bias all the way down to the shared image-text representation. Thanks for listening, and we're happy to take any questions.
+
+[中文参考] 就到这里——我们搭了第一个多语言、多模型的 ProtoBias 流程,覆盖七种语言、两个模型家族,并把这个偏见一路追到共享的图文表征。谢谢大家,欢迎提问。`);
 s.addText("Thank you — questions?", { x: M, y: 2.9, w: 11.8, h: 1.2, fontFace: HEAD,
   fontSize: 40, bold: true, color: "FFFFFF", margin: 0 });
 s.addText([
